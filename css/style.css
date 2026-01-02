@@ -1,16 +1,23 @@
 /* CSS Variables */
 :root {
+    /* Standard Light Theme */
     --primary-blue: #004098;
     --primary-dark: #002d6b;
     --accent-yellow: #FDD600;
     --accent-hover: #e0be00;
+
+    --bg-main: #ffffff;
+    --bg-secondary: #f9f9f9;
+    --bg-card: #ffffff;
+
     --text-color: #333333;
     --text-light: #666666;
-    --bg-light: #f9f9f9;
     --white: #ffffff;
+
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+
     --transition: all 0.3s ease;
 }
 
@@ -25,7 +32,7 @@ body {
     font-family: 'Noto Sans TC', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
-    background-color: var(--white);
+    background-color: var(--bg-main);
     overflow-x: hidden;
 }
 
@@ -135,7 +142,6 @@ img {
 
 .logo img {
     height: 50px;
-    /* Adjust based on logo aspect ratio */
 }
 
 .nav-list {
@@ -151,6 +157,17 @@ img {
 
 .nav-list a:hover {
     color: var(--primary-blue);
+}
+
+/* Ensure header button text is readable */
+.nav-list .btn-primary {
+    color: var(--white);
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.nav-list .btn-primary:hover {
+    background-color: var(--primary-dark);
 }
 
 /* Mobile Menu Toggle */
@@ -178,9 +195,8 @@ img {
     min-height: 600px;
     display: flex;
     align-items: center;
-    color: var(--white);
+    color: var(--primary-dark);
     margin-top: 80px;
-    /* Offset for fixed header */
 }
 
 .hero-bg {
@@ -200,7 +216,8 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(0, 64, 152, 0.8), rgba(0, 64, 152, 0.3));
+    /* Light fade effect: White gradient to make text readable but keep image visible */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
     z-index: -1;
 }
 
@@ -264,7 +281,7 @@ img {
 
 /* Services */
 .services {
-    background-color: var(--bg-light);
+    background-color: var(--bg-secondary);
 }
 
 .services-grid {
@@ -274,7 +291,7 @@ img {
 }
 
 .service-card {
-    background: var(--white);
+    background: var(--bg-card);
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: var(--shadow-sm);
@@ -287,6 +304,7 @@ img {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
     border-bottom-color: var(--accent-yellow);
+    background: var(--bg-light);
 }
 
 .service-icon img {
@@ -441,11 +459,13 @@ img {
     /* Limit to 2 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-clamp: 2;
+    /* Standard property */
 }
 
 /* Contact */
 .contact {
-    background-color: var(--bg-light);
+    background-color: var(--bg-secondary);
 }
 
 .contact-box {
@@ -715,11 +735,13 @@ img {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--white);
+        background-color: var(--bg-secondary);
+        /* Dark bg for mobile menu */
         padding: 20px;
         box-shadow: var(--shadow-md);
         clip-path: circle(0% at 100% 0);
         transition: clip-path 0.5s ease-in-out;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav.active {
