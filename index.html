@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>測試Sun Energy - 專業太陽能解決方案</title>
+    <title>Sun Energy - 專業太陽能解決方案</title>
     <meta name="description" content="Sun Energy 提供全方位的太陽能、風力發電與儲能系統解決方案，致力於創造更潔淨的綠色未來。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for Icons (Optional, using text X for now if not available, but user might like it. I'll stick to CSS shapes or text for simplicity unless requested) -->
 </head>
+
 <body>
 
     <!-- Header -->
@@ -28,7 +31,7 @@
                     <li><a href="#hero">首頁</a></li>
                     <li><a href="#services">服務項目</a></li>
                     <li><a href="#about">關於我們</a></li>
-                    <li><a href="#video">影音專區</a></li>
+                    <li><a href="#cases">實績案例</a></li>
                     <li><a href="#contact" class="btn-primary">聯絡我們</a></li>
                 </ul>
             </nav>
@@ -37,7 +40,8 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
-        <div class="hero-bg" style="background-image: url('images/hero-bg.png');"></div>
+        <!-- Update: Using the new hero image -->
+        <div class="hero-bg" style="background-image: url('images/hero-new.png');"></div>
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <h1 class="hero-title fade-in-up">點亮綠色未來<br>您的能源轉型夥伴</h1>
@@ -87,7 +91,8 @@
         <div class="container about-container">
             <div class="about-content reveal">
                 <h2 class="section-title">關於 Sun Energy</h2>
-                <p class="about-text">我們是一群對綠色能源充滿熱情的專業團隊，致力於透過創新技術推動能源轉型。Sun Energy 擁有豐富的案場經驗，協助無數企業與家庭實現電力自給自足，降低碳足跡。</p>
+                <p class="about-text">我們是一群對綠色能源充滿熱情的專業團隊，致力於透過創新技術推動能源轉型。Sun Energy 擁有豐富的案場經驗，協助無數企業與家庭實現電力自給自足，降低碳足跡。
+                </p>
                 <ul class="about-list">
                     <li><strong>專業認證：</strong> 擁有國家級技術證照與ISO認證。</li>
                     <li><strong>高效品質：</strong> 嚴選頂級模組，確保發電效益最大化。</li>
@@ -96,23 +101,46 @@
                 <a href="#contact" class="btn-text">深入了解我們 &rarr;</a>
             </div>
             <div class="about-image reveal delay-1">
-                <!-- Fallback or decorative block if specific photo not available -->
                 <div class="image-wrapper">
-                    <img src="images/hero-bg.png" alt="關於我們示意圖">
+                    <!-- Update: Using the hero image as about fallback/illustration again or another image if preferred, keeping existing for now -->
+                    <img src="images/hero-new.png" alt="關於我們示意圖">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section id="video" class="section video-section">
+    <!-- Case Studies Section (Renamed from Video) -->
+    <section id="cases" class="section cases-section">
         <div class="container">
             <div class="section-header text-center">
-                <h2 class="section-title">影音專區</h2>
-                <p class="section-desc">觀看我們的實績案例與最新能源技術介紹</p>
+                <h2 class="section-title">實績案例</h2>
+                <p class="section-desc">探索我們如何協助企業實現能源轉型</p>
             </div>
-            <div class="video-wrapper reveal">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/zQ6AjCtiSYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+            <div class="cases-grid reveal">
+                <!-- Case Card 1 -->
+                <div class="case-card" data-title="科技大廠屋頂型太陽能光電系統" data-date="2024年12月完工" data-capacity="1,998.56 kWp"
+                    data-desc="本案場位於桃園科技園區，特別選用抗鹽害模組與不鏽鋼支架。透過智慧雲端監控系統，業主可即時掌握發電效益。預計每年可減少約 1,200 噸碳排放。"
+                    data-video="zQ6AjCtiSYk" data-image="images/case-1.png">
+
+                    <div class="case-thumb">
+                        <img src="images/case-1.png" alt="科技大廠屋頂型太陽能">
+                        <div class="case-overlay">
+                            <span>查看詳情</span>
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <h3>科技大廠屋頂型太陽能光電系統</h3>
+                        <p class="case-brief">運用閒置屋頂打造高效能 2MW 發電系統，年發電量達 250 萬度。</p>
+                        <button class="btn-text text-small">了解更多 &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Placeholder for future cases -->
+                <!-- 
+                <div class="case-card">...</div>
+                <div class="case-card">...</div>
+                -->
             </div>
         </div>
     </section>
@@ -128,7 +156,6 @@
                     <p><strong>Email：</strong> contact@sun-energy.local</p>
                     <p><strong>地址：</strong> 台北市信義區綠能大道 101 號</p>
                 </div>
-                <!-- Simple Form -->
                 <form class="contact-form" action="#" method="POST">
                     <div class="form-group">
                         <input type="text" placeholder="您的姓名" required>
@@ -159,6 +186,32 @@
         </div>
     </footer>
 
+    <!-- Case Study Modal -->
+    <div id="case-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <div class="modal-video">
+                    <div class="video-container">
+                        <iframe id="modal-iframe" src="" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="modal-text">
+                    <span class="modal-badge">完工實績</span>
+                    <h2 id="modal-title">標題</h2>
+                    <ul class="modal-meta">
+                        <li><strong>完工日期：</strong> <span id="modal-date">-</span></li>
+                        <li><strong>建置容量：</strong> <span id="modal-capacity">-</span></li>
+                    </ul>
+                    <p id="modal-desc">內容描述...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
+
 </html>
