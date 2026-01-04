@@ -1,21 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Mobile Menu Toggle
+    // --- Mobile Menu Toggle ---
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
 
-    menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.nav-list a').forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.remove('active');
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
         });
-    });
 
-    // Scroll Reveal Animation
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+    }
+
+    // --- Scroll Reveal Animation ---
     const reveals = document.querySelectorAll('.reveal');
 
     function revealOnScroll() {
@@ -24,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         reveals.forEach((reveal) => {
             const elementTop = reveal.getBoundingClientRect().top;
-
             if (elementTop < windowHeight - elementVisible) {
                 reveal.classList.add('active');
             }
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
 
-    // Smooth Scroll
+    // --- Smooth Scroll ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -56,9 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- Case Study Modal Logic ---
-    const caseModal = document.getElementById('case-modal'); // Renamed to specific
+    const caseModal = document.getElementById('case-modal');
     if (caseModal) {
-        const modal = document.getElementById('case-modal');
         const closeBtn = document.querySelector('.close-btn');
         const modalIframe = document.getElementById('modal-iframe');
         const modalTitle = document.getElementById('modal-title');
@@ -70,74 +70,198 @@ document.addEventListener('DOMContentLoaded', function () {
 
         caseCards.forEach(card => {
             card.addEventListener('click', () => {
-                // Get data from attributes
                 const title = card.getAttribute('data-title');
                 const date = card.getAttribute('data-date');
                 const capacity = card.getAttribute('data-capacity');
                 const desc = card.getAttribute('data-desc');
                 const videoId = card.getAttribute('data-video');
 
-                // Populate Modal
                 modalTitle.textContent = title;
                 modalDate.textContent = date;
                 modalCapacity.textContent = capacity;
                 modalDesc.textContent = desc;
-
-                // Set YouTube src with autoplay
                 modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
-                // Show Modal
-                modal.style.display = 'block';
-                // Slight delay to allow display:block to apply before adding show class for transition
+                caseModal.style.display = 'block';
                 setTimeout(() => {
-                    modal.classList.add('show');
+                    caseModal.classList.add('show');
                 }, 10);
-
-                // Disable body scroll when modal is open
                 document.body.style.overflow = 'hidden';
             });
         });
 
         function closeModal() {
-            modal.classList.remove('show');
+            caseModal.classList.remove('show');
             setTimeout(() => {
-                modal.style.display = 'none';
-                modalIframe.src = ''; // Stop video
+                caseModal.style.display = 'none';
+                modalIframe.src = '';
                 document.body.style.overflow = '';
             }, 300);
         }
 
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
         window.addEventListener('click', (e) => {
-            if (e.target == modal) {
-                closeModal();
-            }
+            if (e.target == caseModal) closeModal();
         });
-
-        // Close on Escape key
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('show')) {
-                closeModal();
-            }
+            if (e.key === 'Escape' && caseModal.classList.contains('show')) closeModal();
         });
     }
 
-    // --- Contact Section Logic (New) ---
+    // --- Contact Section Logic ---
     const showFormBtn = document.getElementById('show-form-btn');
     const contactFormContainer = document.getElementById('contact-form-container');
 
     if (showFormBtn && contactFormContainer) {
         showFormBtn.addEventListener('click', () => {
             contactFormContainer.classList.add('show');
-            // Smooth scroll to form
             const yOffset = -50;
             const y = contactFormContainer.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
-
-            // Hide the button after clicking? Or keep it? keeping it is fine.
-            showFormBtn.style.display = 'none'; // Hide button after opening form
+            showFormBtn.style.display = 'none';
         });
+    }
+
+    // --- Global News Data ---
+    const newsContent = [
+        {
+            date: '2024-04-11',
+            tag: '生態保育',
+            title: '友善動物的綠能棲地',
+            img: 'images/news-real-animals.jpg',
+            source: 'Sergei Gapon',
+            text: `Sun Energy 的案場設計保留了原本的植被與生態廊道，寬闊的模組間距讓羊群能自由穿梭覓食。
+            
+            太陽能板下的陰影更成為了小動物們躲避艷陽與猛禽的天然庇護所。我們證明了，能源開發不一定要犧牲棲地，反而能為在這片土地上生長的動物們，打造一個更安全、舒適的家園。
+            
+            透過與生態專家的合作，我們持續監測案場內的生物多樣性，確保綠能發展與生態保育能夠並行不悖。這不僅是為了環境，更是為了留給下一代一個生生不息的地球。`
+        },
+        {
+            date: '2024-03-25',
+            tag: '農電共生',
+            title: '農電共生的豐收田野',
+            img: 'images/news-real-plants.jpg',
+            source: 'Pexels',
+            text: `透過精密的日照模擬分析，我們在農田上方設置了透光率最佳化的太陽能板。
+            
+            這不僅為農作物提供了適度的遮蔭，減少了水分蒸發與極端氣候的損害，更讓農民在耕作之餘能享有穩定的綠電收益。從耐陰蔬菜到高經濟價值的香草植物，我們見證了土地的雙重豐收。
+            
+            實際案例顯示，在適當的遮蔭下，某些作物的品質甚至優於全日照環境。農電共生實現了糧食安全與能源轉型的完美平衡，讓農業與綠能成為彼此最好的夥伴。`
+        },
+        {
+            date: '2024-02-18',
+            tag: '環境永續',
+            title: '與自然共呼吸的永續循環',
+            img: 'images/news-real-environment.jpg',
+            source: 'Unsplash',
+            text: `我們深信，最好的工程是融入地景的工程。在規劃階段，我們優先考量地形地貌的完整性，避免大規模的整地與砍伐。
+            
+            案場周邊種植了原生樹種作為綠籬，不僅美化了視覺景觀，更涵養了水源與土壤。Sun Energy 致力於打造一座座會呼吸的發電廠，讓每一度綠電，都源自於對大自然的謙卑與尊重。
+            
+            我們堅持使用可回收的材料，並制定了完整的退役回收計畫，確保太陽能板在生命週期結束後，不會成為環境的負擔，真正落實循環經濟的理念。`
+        },
+        {
+            date: '2024-01-10',
+            tag: '社區創生',
+            title: '社區能源共享計畫啟動',
+            img: 'images/news-real-4.jpg',
+            source: 'Pexels',
+            text: `Sun Energy 正式啟動社區能源共享計畫，讓無法建置太陽能板的住戶，也能透過認購模式參與綠能發電。
+            
+            這項計畫不僅讓居民能享有穩定的售電回饋，部分收益更將回饋給社區，用於改善公共設施與照護獨居長者。我們希望綠能不只是硬體的建設，更能成為連結社區情感、創造共好的紐帶。
+            
+            首波示範社區已在台南展開，獲得居民熱烈迴響。未來我們將持續推廣此模式，讓潔淨能源走入更多家庭。`
+        },
+        {
+            date: '2023-12-05',
+            tag: '能源教育',
+            title: '光電教育向下扎根',
+            img: 'images/news-real-5.jpg',
+            source: 'Unsplash',
+            text: `為了讓下一代更了解再生能源的重要性，Sun Energy 舉辦了一系列「小小光電工程師」體驗營。
+            
+            透過寓教於樂的實作課程，孩子們親手組裝太陽能模型車，並實地參觀案場，了解太陽能發電的原理與對環境的益處。看著孩子們專注發光的眼神，我們相信，綠色的種子已在他們心中萌芽。
+            
+            能源教育是百年大計，我們將持續投入資源，培育更多未來的綠能人才。`
+        }
+    ];
+
+    // --- News Homepage Rendering & Pagination ---
+    const newsGrid = document.querySelector('.news-grid');
+    if (newsGrid) {
+        const itemsPerPage = 3;
+        let currentPage = 1;
+
+        function renderPagination() {
+            const existingPagination = document.querySelector('.pagination-container');
+            if (existingPagination) existingPagination.remove();
+
+            const totalPages = Math.ceil(newsContent.length / itemsPerPage);
+            if (totalPages <= 1) return;
+
+            const paginationContainer = document.createElement('div');
+            paginationContainer.className = 'pagination-container';
+            paginationContainer.style.textAlign = 'center';
+            paginationContainer.style.marginTop = '30px';
+            paginationContainer.style.display = 'flex';
+            paginationContainer.style.justifyContent = 'center';
+            paginationContainer.style.gap = '10px';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = `btn-secondary ${i === currentPage ? 'active' : ''}`;
+                btn.style.padding = '5px 15px';
+                btn.style.cursor = 'pointer';
+                if (i !== currentPage) {
+                    btn.style.opacity = '0.6';
+                }
+
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderNews(currentPage);
+                };
+                paginationContainer.appendChild(btn);
+            }
+            newsGrid.parentNode.appendChild(paginationContainer);
+        }
+
+        function renderNews(page) {
+            newsGrid.innerHTML = '';
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedItems = newsContent.slice(start, end);
+
+            paginatedItems.forEach((item, index) => {
+                const originalIndex = start + index;
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.onclick = () => location.href = `news-detail.html?id=${originalIndex}`;
+                card.style.cursor = 'pointer';
+
+                card.innerHTML = `
+                    <div class="news-header">
+                        <span class="news-date">${item.date}</span>
+                        <span class="news-tag">${item.tag}</span>
+                    </div>
+                    <div class="news-body">
+                        <h3 class="news-title">${item.title}</h3>
+                        <p class="news-desc">${item.text}</p>
+                    </div>
+                    <div class="news-image">
+                        <div class="schematic-wrapper">
+                            <img src="${item.img}" alt="${item.title}">
+                        </div>
+                        <span class="image-source">圖片來源：${item.source}</span>
+                    </div>
+                `;
+                newsGrid.appendChild(card);
+            });
+            renderPagination();
+        }
+
+        // Initial Render
+        renderNews(currentPage);
     }
 
     // --- News Detail Page Logic ---
@@ -145,48 +269,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (newsDetailContainer) {
         const urlParams = new URLSearchParams(window.location.search);
         const newsId = urlParams.get('id');
-
-        // Full Content Data
-        const newsContent = [
-            {
-                date: '2024-04-11',
-                title: '光電共生，守護家園生態',
-                img: 'images/news-sketch-1.png',
-                text: `日力能源不僅致力於發電，更在乎環境的永續。
-
-我們在最新的台南案場中，與當地生態專家合作，導入了生態友善的設計。我們特意保留了原本的植被緩衝區，並在太陽能板下方種植耐陰性的原生植物。
-
-經過一年的觀察，我們驚喜地發現，這裡不僅成為了野兔、刺蝟等小動物們的庇護所，鳥類的築巢率也比周邊地區高出 30%。
-
-這證明了綠能發展與生態保育並非零和遊戲，只要用心規劃，太陽能板不僅能遮陽降溫，更是守護土地的溫柔力量。達成科技與自然的完美平衡，是 Sun Energy 永遠的承諾。
-
-此外，本案場也將作為「綠能教育基地」，定期開放學校與機關團體參觀，讓大眾親身體驗綠色能源與環境生態共榮共存的可能性。`
-            },
-            {
-                date: '2024-03-25',
-                title: '能源轉型，從社區教育做起',
-                img: 'images/news-sketch-2.png',
-                text: `綠色能源的推動需要眾人的參與，而教育是改變未來的關鍵。
-
-本月我們與台中海線社區合作，舉辦了為期兩天的「小小能源工程師體驗營」。活動中，我們帶領社區孩童認識各種再生能源的原理，從太陽能、風能到生質能。
-
-透過親手組裝太陽能車與風力發電機模型的過程，孩子們眼中閃爍著對科學的好奇光芒。我們相信，將永續的種子種在下一代的心中，是企業回饋社會最有價值的方式。
-
-未來，我們也將持續推動類似的科普教育計畫，讓綠能知識走進更多校園與社區，包括舉辦親子共學講座、綠能繪本導讀等活動，讓節能減碳的理念深入每個家庭。`
-            },
-            {
-                date: '2024-02-18',
-                title: '漁電共生，創造雙贏新局',
-                img: 'images/news-sketch-3.png',
-                text: `面對傳統養殖漁業人口老化與氣候變遷的挑戰，「漁電共生」成為了產業升級的新契機。
-
-Sun Energy 協助彰化沿海的養殖戶引入智慧化的漁電共生系統。透過在魚塭上方設置太陽能板，不僅產出了綠電，面板適度的遮蔽也避免了夏季水溫過高，減少了養殖魚類的熱緊迫。
-
-此外，我們還導入了水質自動監測系統，讓漁民可以透過手機即時掌握水質數據。實施一年下來，不僅水產養殖的存活率提升了 15%，漁民更多了一筆穩定的綠能售電收益。
-
-從單純的養殖到「發電+養魚」的雙重獲利模式，我們與漁民攜手，創造了產業與綠能的雙贏新局。未來我們計畫將此模式推廣至更多沿海鄉鎮，協助轉型。`
-            }
-        ];
 
         if (newsId !== null && newsContent[newsId]) {
             const data = newsContent[newsId];
@@ -196,7 +278,10 @@ Sun Energy 協助彰化沿海的養殖戶引入智慧化的漁電共生系統。
                     <h1 class="news-detail-title">${data.title}</h1>
                 </div>
                 <div class="news-detail-image">
-                    <img src="${data.img}" alt="${data.title}">
+                    <div class="schematic-wrapper">
+                        <img src="${data.img}" alt="${data.title}">
+                    </div>
+                    <span class="image-source">圖片來源：${data.source}</span>
                 </div>
                 <div class="news-detail-body">
                     ${data.text.replace(/\n/g, '<br>')}
@@ -206,4 +291,12 @@ Sun Energy 協助彰化沿海的養殖戶引入智慧化的漁電共生系統。
             newsDetailContainer.innerHTML = '<p class="error-msg">找不到該則新聞。</p>';
         }
     }
+});
+
+// --- Sidebar Interaction Disable (Step 309) ---
+document.querySelectorAll('.floating-sidebar .sidebar-item').forEach(item => {
+    item.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent link navigation
+        console.log('Sidebar item clicked but disabled.');
+    });
 });

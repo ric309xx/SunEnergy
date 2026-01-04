@@ -1,4 +1,4 @@
-/* CSS Variables */
+﻿/* CSS Variables */
 :root {
     /* Standard Light Theme */
     --primary-blue: #004098;
@@ -411,8 +411,8 @@ img {
 }
 
 .about-list li::before {
-    content: '✓';
-    color: var(--accent-yellow);
+    content: '??;
+ color: var(--accent-yellow);
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -1160,4 +1160,130 @@ img {
         flex-direction: column;
         gap: 10px;
     }
+}
+
+/* Schematic Overlay */
+.schematic-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.schematic-wrapper::after {
+    content: '示意圖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.image-source {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+    font-style: italic;
+    display: block;
+}
+
+/* Ensure images within wrapper fit correctly */
+.schematic-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+/* Schematic Overlay Refinement (Step 208) */
+.schematic-wrapper::after {
+    font-size: 2rem !important;
+    /* Smaller font */
+    color: rgba(255, 255, 255, 0.4) !important;
+    /* More transparent */
+}
+
+/* Image Source Refinement */
+.news-image,
+.news-detail-image,
+.case-thumb {
+    position: relative;
+    /* Ensure container is relative for absolute positioning */
+}
+
+.image-source {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-top-left-radius: 5px;
+    z-index: 20;
+    pointer-events: none;
+    text-align: right;
+    margin-top: 0 !important;
+    /* Override previous margin */
+}
+
+
+/* Schematic Overlay Final Tweak (Step 221) */
+.schematic-wrapper::after {
+    font-size: 1.5rem !important;
+    /* Even smaller */
+    color: rgba(255, 255, 255, 0.25) !important;
+    /* More transparent */
+}
+
+/* News Description Truncation */
+.news-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Reset previous styles if conflicting */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+
+/* --- 解決新聞列表欄位跑版問題 (Override) --- */
+/* 強制設定 Grid 欄位數，覆蓋原本的 auto-fit */
+
+/* 手機版：單欄 */
+.news-grid {
+    grid-template-columns: 1fr !important;
+}
+
+/* 平板版：雙欄 */
+@media (min-width: 768px) {
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* 電腦版：固定三欄 */
+@media (min-width: 1024px) {
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+
+/* --- 暫時停用側邊欄功能 (Step 303 Modified) --- */
+.floating-sidebar .sidebar-item {
+    /* pointer-events: none;  <-- Removed to allow hover */
+    cursor: not-allowed;
+    /* Visual cue that it's disabled */
 }
