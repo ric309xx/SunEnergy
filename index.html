@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Font Awesome for Icons (Optional, using text X for now if not available, but user might like it. I'll stick to CSS shapes or text for simplicity unless requested) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -32,20 +32,41 @@
                     <li><a href="#services">服務項目</a></li>
                     <li><a href="#about">關於我們</a></li>
                     <li><a href="#cases">實績案例</a></li>
+                    <li><a href="#news">最新消息</a></li>
                     <li><a href="#contact" class="btn-primary">聯絡我們</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Floating Sidebar -->
+    <div class="floating-sidebar">
+        <a href="tel:0800888888" class="sidebar-item" title="電話">
+            <i class="fas fa-phone-alt"></i>
+            <span class="tooltip">聯絡電話</span>
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" class="sidebar-item" title="Youtube">
+            <i class="fab fa-youtube"></i>
+            <span class="tooltip">Youtube</span>
+        </a>
+        <a href="mailto:contact@sun-energy.local" class="sidebar-item" title="Email">
+            <i class="fas fa-envelope"></i>
+            <span class="tooltip">Email</span>
+        </a>
+        <a href="#" class="sidebar-item" title="Line ID">
+            <i class="fab fa-line"></i>
+            <span class="tooltip">Line ID</span>
+        </a>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero" class="hero">
-        <!-- Update: Reverting to original hero image with fade effect -->
-        <div class="hero-bg" style="background-image: url('images/hero-bg.jpg');"></div>
+        <!-- Update: New Hero Background Image -->
+        <div class="hero-bg" style="background-image: url('images/hero-new-bg.png');"></div>
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <h1 class="hero-title fade-in-up">點亮綠色未來<br>您的能源轉型夥伴</h1>
-            <p class="hero-subtitle fade-in-up delay-1">提供一站式太陽能、風電與儲能解決方案，為地球永續盡一份心力。</p>
+            <h1 class="hero-title fade-in-up">做好每一件<br>意義不凡的小事</h1>
+            <p class="hero-subtitle fade-in-up delay-1">Every single detail matters.<br>專注細節，成就非凡綠能未來。</p>
             <div class="hero-actions fade-in-up delay-2">
                 <a href="#contact" class="btn-primary">免費諮詢</a>
                 <a href="#services" class="btn-secondary">了解更多</a>
@@ -137,13 +158,14 @@
                 </div>
 
                 <!-- Case Card 2 (Placeholder) -->
+                <!-- Case Card 2 (Placeholder) -->
                 <div class="case-card" data-title="大型地面型光電示範案場" data-date="規劃中" data-capacity="5,000 kWp"
                     data-desc="位於彰化沿海地區的大型地面型案場，將採用雙面發電模組以提升發電效率。本案場將結合生態復育計畫，達成綠能與環境共生。" data-video=""
-                    data-image="images/1 (3).png">
+                    data-image="images/schematic-ground.png">
 
                     <div class="case-thumb">
-                        <!-- Using 1 (3).png as placeholder -->
-                        <img src="images/1 (3).png" alt="大型地面型光電示範案場">
+                        <!-- Using generated schematic image -->
+                        <img src="images/schematic-ground.png" alt="大型地面型光電示範案場">
                         <div class="case-overlay">
                             <span>查看詳情</span>
                         </div>
@@ -158,11 +180,11 @@
                 <!-- Case Card 3 (Placeholder) -->
                 <div class="case-card" data-title="漁電共生專案" data-date="規劃中" data-capacity="3,500 kWp"
                     data-desc="台南地區漁電共生專案，在不影響養殖作業的前提下架設太陽能板。透過智能溫控與遮陽設計，反而能提升特定養殖物種的存活率與產量。" data-video=""
-                    data-image="images/1 (4).png">
+                    data-image="images/schematic-fishery.png">
 
                     <div class="case-thumb">
-                        <!-- Using 1 (4).png as placeholder -->
-                        <img src="images/1 (4).png" alt="漁電共生專案">
+                        <!-- Using generated schematic image -->
+                        <img src="images/schematic-fishery.png" alt="漁電共生專案">
                         <div class="case-overlay">
                             <span>查看詳情</span>
                         </div>
@@ -177,29 +199,112 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- News Section -->
+    <section id="news" class="section news">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">最新消息</h2>
+                <p class="section-desc">關注 Sun Energy，掌握綠能趨勢與我們的最新動態</p>
+            </div>
+
+            <div class="news-grid reveal">
+                <!-- News Card 1 -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <span class="news-date">2024-04-11</span>
+                        <span class="news-tag">生態保育</span>
+                    </div>
+                    <div class="news-body">
+                        <h3 class="news-title">友善動物的綠能棲地</h3>
+                        <p class="news-desc">Sun Energy
+                            的案場設計保留了原本的植被與生態廊道，寬闊的模組間距讓羊群能自由穿梭覓食，太陽能板下的陰影更成為了小動物們躲避艷陽與猛禽的天然庇護所。我們證明了，能源開發不一定要犧牲棲地，反而能為在這片土地上生長的動物們，打造一個更安全、舒適的家園。
+                        </p>
+                    </div>
+                    <div class="news-image">
+                        <img src="images/news-sketch-animals.png" alt="友善動物的綠能棲地">
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <span class="news-date">2024-03-25</span>
+                        <span class="news-tag">農電共生</span>
+                    </div>
+                    <div class="news-body">
+                        <h3 class="news-title">農電共生的豐收田野</h3>
+                        <p class="news-desc">
+                            透過精密的日照模擬分析，我們在農田上方設置了透光率最佳化的太陽能板。這不僅為農作物提供了適度的遮蔭，減少了水分蒸發與極端氣候的損害，更讓農民在耕作之餘能享有穩定的綠電收益。從耐陰蔬菜到高經濟價值的香草植物，我們見證了土地的雙重豐收，實現了糧食安全與能源轉型的完美平衡。
+                        </p>
+                    </div>
+                    <div class="news-image">
+                        <img src="images/news-sketch-plants.png" alt="農電共生的豐收田野">
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="news-card">
+                    <div class="news-header">
+                        <span class="news-date">2024-02-18</span>
+                        <span class="news-tag">環境永續</span>
+                    </div>
+                    <div class="news-body">
+                        <h3 class="news-title">與自然共呼吸的永續循環</h3>
+                        <p class="news-desc">
+                            我們深信，最好的工程是融入地景的工程。在規劃階段，我們優先考量地形地貌的完整性，避免大規模的整地與砍伐。案場周邊種植了原生樹種作為綠籬，不僅美化了視覺景觀，更涵養了水源與土壤。Sun
+                            Energy 致力於打造一座座會呼吸的發電廠，讓每一度綠電，都源自於對大自然的謙卑與尊重。</p>
+                    </div>
+                    <div class="news-image">
+                        <img src="images/news-sketch-environment.png" alt="與自然共呼吸的永續循環">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section Redesign -->
     <section id="contact" class="section contact">
         <div class="container">
-            <div class="contact-box reveal">
-                <h2 class="contact-title">準備好擁抱綠色能源了嗎？</h2>
-                <p class="contact-subtitle">立即聯繫我們，取得免費的案場評估與報價。</p>
-                <div class="contact-info">
-                    <p><strong>電話：</strong> 0800-888-888</p>
-                    <p><strong>Email：</strong> contact@sun-energy.local</p>
-                    <p><strong>地址：</strong> 台北市信義區綠能大道 101 號</p>
+            <div class="contact-split reveal">
+                <!-- Left Image -->
+                <div class="contact-left">
+                    <div class="circle-mask">
+                        <img src="images/contact-side.png" alt="Solar Roof">
+                    </div>
                 </div>
-                <form class="contact-form" action="#" method="POST">
-                    <div class="form-group">
-                        <input type="text" placeholder="您的姓名" required>
+
+                <!-- Right Content -->
+                <div class="contact-right">
+                    <h2 class="contact-title-new">免費評估、諮詢表單</h2>
+
+                    <!-- Content Simplified: Options removed -->
+                    <div class="contact-description">
+                        <p id="option-desc">無論您是想將閒置屋頂出租獲利、規劃自費建置太陽能系統，或是尋求穩健的電廠投資機會，Sun Energy
+                            專業團隊都能為您提供最詳盡的評估與建議。我們致力於讓綠色能源觸手可及，現在就跨出改變的第一步。</p>
                     </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="電子郵件" required>
+
+                    <button id="show-form-btn" class="btn-secondary btn-large">立即填寫，加入太陽能行列! <i
+                            class="fas fa-arrow-right"></i></button>
+
+                    <!-- Hidden Form (Shows on click) -->
+                    <div id="contact-form-container" class="contact-form-container hidden-form">
+                        <form class="contact-form-new" action="#" method="POST">
+                            <div class="form-group">
+                                <input type="text" placeholder="您的姓名" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="電子郵件" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="聯絡電話" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="3" placeholder="備註或想諮詢的細節..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary btn-block">送出申請</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <textarea rows="4" placeholder="您想諮詢的項目..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary btn-block">發送訊息</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
