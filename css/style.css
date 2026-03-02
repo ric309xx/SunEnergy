@@ -575,6 +575,7 @@ img {
     color: var(--text-color);
     margin-bottom: 10px;
     line-height: 1.4;
+    transition: color 0.3s ease;
 }
 
 .case-brief {
@@ -586,6 +587,18 @@ img {
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-clamp: 2;
+    transition: color 0.3s ease;
+}
+
+/* Hover State Text Color Inversion */
+.case-card:hover .case-info h3 {
+    color: var(--bg-dark);
+    /* Turn dark on white background */
+}
+
+.case-card:hover .case-brief {
+    color: #4a5568;
+    /* Turn dark grey on white background */
 }
 
 /* Contact */
