@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 const casesData = data.items || [];
                 casesGrid.innerHTML = ''; // clear loading state if any
-                
+
                 casesData.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'case-card';
@@ -101,10 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     card.setAttribute('data-desc', item.desc || '');
                     card.setAttribute('data-video', item.video || '');
                     card.setAttribute('data-image', item.image || '');
-                    
+
+                    const isSchematic = item.is_schematic ? 'schematic' : '';
+
                     card.innerHTML = `
                         <div class="case-thumb">
-                            <div class="schematic-wrapper">
+                            <div class="schematic-wrapper ${isSchematic}">
                                 <img src="${item.image}" alt="${item.title}">
                             </div>
                             <div class="case-overlay">
@@ -156,14 +158,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let newsContent = [];
     const newsGrid = document.querySelector('.news-grid');
     const newsDetailContainer = document.getElementById('news-detail-container');
-    
+
     // Check if we are on index (newsGrid exists) or detail page (newsDetailContainer exists)
     if (newsGrid || newsDetailContainer) {
         fetch('data/news.json')
             .then(response => response.json())
             .then(data => {
                 newsContent = data.items || [];
-                
+
                 // Initialize Homepage Rendering
                 if (newsGrid) {
                     const itemsPerPage = 3;
@@ -217,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             card.style.cursor = 'pointer';
 
                             const sourceHTML = item.source ? `<span class="image-source">圖片來源：${item.source}</span>` : '';
+                            const isSchematic = item.is_schematic ? 'schematic' : '';
 
                             card.innerHTML = `
                                 <div class="news-header">
@@ -228,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <p class="news-desc">${item.text}</p>
                                 </div>
                                 <div class="news-image">
-                                    <div class="schematic-wrapper">
+                                    <div class="schematic-wrapper ${isSchematic}">
                                         <img src="${item.img}" alt="${item.title}">
                                     </div>
                                     ${sourceHTML}
@@ -243,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     renderNews(currentPage);
                 }
 
-                // Initialize Detail Page Rendering
                 if (newsDetailContainer) {
                     const urlParams = new URLSearchParams(window.location.search);
                     const newsId = urlParams.get('id');
@@ -251,13 +253,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (newsId !== null && newsContent[newsId]) {
                         const data = newsContent[newsId];
                         const sourceHTML = data.source ? `<span class="image-source">圖片來源：${data.source}</span>` : '';
+                        const isSchematic = data.is_schematic ? 'schematic' : '';
+
                         newsDetailContainer.innerHTML = `
                             <div class="news-detail-header">
                                 <span class="news-detail-date">${data.date || ''}</span>
                                 <h1 class="news-detail-title">${data.title}</h1>
                             </div>
                             <div class="news-detail-image">
-                                <div class="schematic-wrapper">
+                                <div class="schematic-wrapper ${isSchematic}">
                                     <img src="${data.img}" alt="${data.title}">
                                 </div>
                                 ${sourceHTML}

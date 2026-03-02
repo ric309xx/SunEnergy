@@ -25,7 +25,8 @@ collections:
               - {label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
               - {label: "標籤 / 分類", name: "tag", widget: "string"}
               - {label: "封面圖片", name: "img", widget: "image"}
-              - {label: "圖片來源說明", name: "source", widget: "string", required: false}
+              - {label: "顯示『示意圖』文字標籤", name: "is_schematic", widget: "boolean", default: false, required: false, hint: "勾選後，圖片上會疊加半透明的示意圖文字"}
+              - {label: "圖片來源說明", name: "source", widget: "string", required: false, hint: "如果留空，網頁上就不會顯示圖片來源"}
               - {label: "內文大綱排版", name: "text", widget: "text"}
 
       - name: "cases"
@@ -42,6 +43,7 @@ collections:
               - {label: "完工日期 / 狀態", name: "date", widget: "string"}
               - {label: "建置容量", name: "capacity", widget: "string", hint: "例如：1,998.56 kWp"}
               - {label: "封面圖片", name: "image", widget: "image"}
+              - {label: "顯示『示意圖』文字標籤", name: "is_schematic", widget: "boolean", default: false, required: false, hint: "勾選後，首頁圖片上會疊加半透明的示意圖文字"}
               - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false, hint: "如果有宣傳影片，請填寫影片網址 v= 後面的英數字串"}
               - {label: "首頁簡短描述 (卡片顯示)", name: "brief", widget: "string"}
               - {label: "彈窗詳細描述 (點擊後顯示)", name: "desc", widget: "text"}
