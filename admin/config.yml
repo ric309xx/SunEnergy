@@ -11,24 +11,6 @@ collections:
     editor:
       preview: true # 開啟預覽，準備套用客製化預覽樣式
     files:
-      - name: "news"
-        label: "最新消息 (編輯區)"
-        file: "data/news.json"
-        description: "請在下方列表點擊展開文章進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
-        fields:
-          - name: "items"
-            label: "所有文章列表"
-            widget: "list"
-            summary: "📰 {{fields.title}} ({{fields.date}})" # 讓收合的方塊顯示文章標題，而不是原始的標籤
-            fields:
-              - {label: "文章標題", name: "title", widget: "string"}
-              - {label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
-              - {label: "標籤 / 分類", name: "tag", widget: "string"}
-              - {label: "封面圖片", name: "img", widget: "image"}
-              - {label: "顯示『示意圖』文字標籤", name: "is_schematic", widget: "boolean", default: false, required: false, hint: "勾選後，圖片上會疊加半透明的示意圖文字"}
-              - {label: "圖片來源說明", name: "source", widget: "string", required: false, hint: "如果留空，網頁上就不會顯示圖片來源"}
-              - {label: "內文大綱排版", name: "text", widget: "text"}
-
       - name: "cases"
         label: "實績案例 (編輯區)"
         file: "data/cases.json"
@@ -47,3 +29,21 @@ collections:
               - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false, hint: "如果有宣傳影片，請填寫影片網址 v= 後面的英數字串"}
               - {label: "首頁簡短描述 (卡片顯示)", name: "brief", widget: "string"}
               - {label: "彈窗詳細描述 (點擊後顯示)", name: "desc", widget: "text"}
+
+      - name: "news"
+        label: "最新消息 (編輯區)"
+        file: "data/news.json"
+        description: "請在下方列表點擊展開文章進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
+        fields:
+          - name: "items"
+            label: "所有文章列表"
+            widget: "list"
+            summary: "📰 {{fields.title}} ({{fields.date}})" # 讓收合的方塊顯示文章標題，而不是原始的標籤
+            fields:
+              - {label: "文章標題", name: "title", widget: "string"}
+              - {label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+              - {label: "標籤 / 分類", name: "tag", widget: "string"}
+              - {label: "封面圖片", name: "img", widget: "image"}
+              - {label: "顯示『示意圖』文字標籤", name: "is_schematic", widget: "boolean", default: false, required: false, hint: "勾選後，圖片上會疊加半透明的示意圖文字"}
+              - {label: "圖片來源說明", name: "source", widget: "string", required: false, hint: "如果留空，網頁上就不會顯示圖片來源"}
+              - {label: "內文大綱排版", name: "text", widget: "text"}

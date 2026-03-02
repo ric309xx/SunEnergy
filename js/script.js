@@ -127,7 +127,31 @@ document.addEventListener('DOMContentLoaded', function () {
                         modalDate.textContent = item.date;
                         modalCapacity.textContent = item.capacity;
                         modalDesc.textContent = item.desc;
-                        modalIframe.src = item.video ? `https://www.youtube.com/embed/${item.video}?autoplay=1` : '';
+
+                        const modalImg = document.getElementById('modal-image');
+                        const modalVideoContainer = document.getElementById('modal-video-container');
+
+                        // 處理圖片顯示邏輯
+                        if (item.image) {
+                            modalImg.src = item.image;
+                            modalImg.style.display = 'block';
+                        } else {
+                            modalImg.src = '';
+                            modalImg.style.display = 'none';
+                        }
+
+                        // 處理影片顯示邏輯
+                        if (item.video) {
+                            modalIframe.src = `https://www.youtube.com/embed/${item.video}?autoplay=1`;
+                            modalVideoContainer.style.display = 'block';
+
+                            // 為了美觀，如果有影片也有圖片，讓圖片加上一點下邊距
+                            modalImg.style.marginBottom = item.image ? '15px' : '0';
+                        } else {
+                            modalIframe.src = '';
+                            modalVideoContainer.style.display = 'none';
+                            modalImg.style.marginBottom = '0';
+                        }
 
                         caseModal.style.display = 'block';
                         setTimeout(() => {

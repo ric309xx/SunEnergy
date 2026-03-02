@@ -235,8 +235,10 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <div class="modal-body">
-                <div class="modal-video">
-                    <div class="video-container">
+                <div class="modal-media" id="modal-media-container">
+                    <img id="modal-image" src="" alt="案場照片"
+                        style="width: 100%; height: auto; display: none; object-fit: cover;">
+                    <div class="video-container" id="modal-video-container" style="display: none; margin-top: 5px;">
                         <iframe id="modal-iframe" src="" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
