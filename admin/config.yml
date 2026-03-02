@@ -8,36 +8,40 @@ public_folder: "images/uploads"
 collections:
   - name: "site_content"
     label: "網站內容管理"
+    editor:
+      preview: false # 關閉右側容易讓人困惑的預覽窗格，變成全版面填寫表單
     files:
       - name: "news"
-        label: "最新消息 (News)"
+        label: "最新消息 (編輯區)"
         file: "data/news.json"
-        description: "新增與編輯所有最新消息"
+        description: "請在下方列表點擊展開文章進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
         fields:
           - name: "items"
-            label: "消息列表"
+            label: "所有文章列表"
             widget: "list"
+            summary: "📰 {{fields.title}} ({{fields.date}})" # 讓收合的方塊顯示文章標題，而不是原始的標籤
             fields:
+              - {label: "文章標題", name: "title", widget: "string"}
+              - {label: "發布日期", name: "date", widget: "date", format: "YYYY-MM-DD"}
               - {label: "標籤 / 分類", name: "tag", widget: "string"}
-              - {label: "標題", name: "title", widget: "string"}
-              - {label: "日期", name: "date", widget: "date", format: "YYYY-MM-DD"}
               - {label: "封面圖片", name: "img", widget: "image"}
               - {label: "圖片來源說明", name: "source", widget: "string", required: false}
-              - {label: "內文", name: "text", widget: "text"}
+              - {label: "內文大綱排版", name: "text", widget: "text"}
 
       - name: "cases"
-        label: "實績案例 (Cases)"
+        label: "實績案例 (編輯區)"
         file: "data/cases.json"
-        description: "新增與編輯所有的實績案場"
+        description: "請在下方列表點擊展開案場進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
         fields:
           - name: "items"
-            label: "案場列表"
+            label: "所有案場列表"
             widget: "list"
+            summary: "💡 {{fields.title}}" # 讓收合的方塊顯示案場標題
             fields:
-              - {label: "案場名稱 (標題)", name: "title", widget: "string"}
+              - {label: "案場標題", name: "title", widget: "string"}
               - {label: "完工日期 / 狀態", name: "date", widget: "string"}
-              - {label: "建置容量", name: "capacity", widget: "string"}
+              - {label: "建置容量", name: "capacity", widget: "string", hint: "例如：1,998.56 kWp"}
               - {label: "封面圖片", name: "image", widget: "image"}
-              - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false}
-              - {label: "簡短描述 (卡片顯示)", name: "brief", widget: "string"}
-              - {label: "詳細描述 (彈窗顯示)", name: "desc", widget: "text"}
+              - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false, hint: "如果有宣傳影片，請填寫影片網址 v= 後面的英數字串"}
+              - {label: "首頁簡短描述 (卡片顯示)", name: "brief", widget: "string"}
+              - {label: "彈窗詳細描述 (點擊後顯示)", name: "desc", widget: "text"}
