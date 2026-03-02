@@ -7,6 +7,50 @@
     <title>Sun Energy - 內容管理系統</title>
     <!-- 引入 Netlify Identity Widget，這是登入後台的關鍵 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        /* 客製化 Decap CMS 首頁儀表板的選單卡片，解決預設空白的問題 */
+        a[href*="entries/cases"] {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364) !important;
+            color: white !important;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+            border: none !important;
+        }
+
+        a[href*="entries/cases"] h2 {
+            color: #ffc107 !important;
+        }
+
+        a[href*="entries/cases"]::after {
+            content: "📸 管理所有的太陽能實績案場、相片與 YouTube 影片";
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        a[href*="entries/news"] {
+            background: linear-gradient(135deg, #1e3c72, #2a5298) !important;
+            color: white !important;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+            border: none !important;
+        }
+
+        a[href*="entries/news"] h2 {
+            color: #64b5f6 !important;
+        }
+
+        a[href*="entries/news"]::after {
+            content: "📰 發布最新的綠能相關動態、最新消息與活動紀錄";
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 
 <body>
