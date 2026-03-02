@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "images/uploads"
+
+collections:
+  - name: "site_content"
+    label: "網站內容管理"
+    files:
+      - name: "news"
+        label: "最新消息 (News)"
+        file: "data/news.json"
+        description: "新增與編輯所有最新消息"
+        fields:
+          - name: "items"
+            label: "消息列表"
+            widget: "list"
+            fields:
+              - {label: "標籤 / 分類", name: "tag", widget: "string"}
+              - {label: "標題", name: "title", widget: "string"}
+              - {label: "日期", name: "date", widget: "date", format: "YYYY-MM-DD"}
+              - {label: "封面圖片", name: "img", widget: "image"}
+              - {label: "圖片來源說明", name: "source", widget: "string", required: false}
+              - {label: "內文", name: "text", widget: "text"}
+
+      - name: "cases"
+        label: "實績案例 (Cases)"
+        file: "data/cases.json"
+        description: "新增與編輯所有的實績案場"
+        fields:
+          - name: "items"
+            label: "案場列表"
+            widget: "list"
+            fields:
+              - {label: "案場名稱 (標題)", name: "title", widget: "string"}
+              - {label: "完工日期 / 狀態", name: "date", widget: "string"}
+              - {label: "建置容量", name: "capacity", widget: "string"}
+              - {label: "封面圖片", name: "image", widget: "image"}
+              - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false}
+              - {label: "簡短描述 (卡片顯示)", name: "brief", widget: "string"}
+              - {label: "詳細描述 (彈窗顯示)", name: "desc", widget: "text"}
