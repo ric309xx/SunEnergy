@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"
-public_folder: "images/uploads"
+media_folder: "images"
+public_folder: "images"
 
 collections:
   - name: "site_content"
@@ -22,7 +22,7 @@ collections:
             summary: "📰 {{fields.title}} ({{fields.date}})" # 讓收合的方塊顯示文章標題，而不是原始的標籤
             fields:
               - {label: "文章標題", name: "title", widget: "string"}
-              - {label: "發布日期", name: "date", widget: "date", format: "YYYY-MM-DD"}
+              - {label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
               - {label: "標籤 / 分類", name: "tag", widget: "string"}
               - {label: "封面圖片", name: "img", widget: "image"}
               - {label: "圖片來源說明", name: "source", widget: "string", required: false}
