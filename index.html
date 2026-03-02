@@ -237,12 +237,7 @@
             <div class="modal-body">
                 <div class="modal-media" id="modal-media-container">
                     <img id="modal-image" src="" alt="案場照片"
-                        style="width: 100%; height: auto; display: none; object-fit: cover;">
-                    <div class="video-container" id="modal-video-container" style="display: none; margin-top: 5px;">
-                        <iframe id="modal-iframe" src="" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
+                        style="width: 100%; height: auto; display: none; object-fit: cover; border-radius: 8px;">
                 </div>
                 <div class="modal-text">
                     <span class="modal-badge">完工實績</span>
@@ -252,6 +247,13 @@
                         <li><strong>建置容量：</strong> <span id="modal-capacity">-</span></li>
                     </ul>
                     <p id="modal-desc">內容描述...</p>
+                </div>
+                <!-- 影片移到內文最下方 -->
+                <div class="video-container" id="modal-video-container"
+                    style="display: none; margin-top: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <iframe id="modal-iframe" src="" frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
                 </div>
             </div>
         </div>

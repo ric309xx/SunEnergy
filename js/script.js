@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // 處理影片顯示邏輯
                         if (item.video) {
-                            modalIframe.src = `https://www.youtube.com/embed/${item.video}?autoplay=1`;
+                            modalIframe.src = `https://www.youtube.com/embed/${item.video}`;
                             modalVideoContainer.style.display = 'block';
 
                             // 為了美觀，如果有影片也有圖片，讓圖片加上一點下邊距
