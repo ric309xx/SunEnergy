@@ -89,76 +89,134 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('data/cases.json')
             .then(response => response.json())
             .then(data => {
-                const casesData = data.items || [];
-                casesGrid.innerHTML = ''; // clear loading state if any
+                let casesData = data.items || [];
 
-                casesData.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'case-card';
-                    card.setAttribute('data-title', item.title || '');
-                    card.setAttribute('data-date', item.date || '');
-                    card.setAttribute('data-capacity', item.capacity || '');
-                    card.setAttribute('data-desc', item.desc || '');
-                    card.setAttribute('data-video', item.video || '');
-                    card.setAttribute('data-image', item.image || '');
+                // --- 分頁變數設定 ---
+                const itemsPerPage = 3;
+                let currentPage = 1;
+                const totalPages = Math.ceil(casesData.length / itemsPerPage);
 
-                    const isSchematic = item.is_schematic ? 'schematic' : '';
+                const casesPagination = document.getElementById('cases-pagination');
+                const casesPrevBtn = document.getElementById('cases-prev-btn');
+                const casesNextBtn = document.getElementById('cases-next-btn');
+                const casesPageNumbers = document.getElementById('cases-page-numbers');
 
-                    card.innerHTML = `
-                        <div class="case-thumb">
-                            <div class="schematic-wrapper ${isSchematic}">
-                                <img src="${item.image}" alt="${item.title}">
+                // 如果項目超過 3 個，就顯示分頁元件
+                if (casesData.length > itemsPerPage) {
+                    casesPagination.style.display = 'flex';
+                }
+
+                function renderCases(page) {
+                    casesGrid.innerHTML = '';
+                    casesPageNumbers.innerHTML = '';
+
+                    // 計算當前頁要顯示的陣列切片
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+                    const pageItems = casesData.slice(start, end);
+
+                    pageItems.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'case-card';
+                        card.setAttribute('data-title', item.title || '');
+                        card.setAttribute('data-date', item.date || '');
+                        card.setAttribute('data-capacity', item.capacity || '');
+                        card.setAttribute('data-desc', item.desc || '');
+                        card.setAttribute('data-video', item.video || '');
+                        card.setAttribute('data-image', item.image || '');
+
+                        const isSchematic = item.is_schematic ? 'schematic' : '';
+
+                        card.innerHTML = `
+                            <div class="case-thumb">
+                                <div class="schematic-wrapper ${isSchematic}">
+                                    <img src="${item.image}" alt="${item.title}">
+                                </div>
+                                <div class="case-overlay">
+                                    <span>查看詳情</span>
+                                </div>
                             </div>
-                            <div class="case-overlay">
-                                <span>查看詳情</span>
+                            <div class="case-info">
+                                <h3>${item.title}</h3>
+                                <p class="case-brief">${item.brief}</p>
+                                <button class="btn-text text-small">了解更多 &rarr;</button>
                             </div>
-                        </div>
-                        <div class="case-info">
-                            <h3>${item.title}</h3>
-                            <p class="case-brief">${item.brief}</p>
-                            <button class="btn-text text-small">了解更多 &rarr;</button>
-                        </div>
-                    `;
-                    casesGrid.appendChild(card);
+                        `;
+                        casesGrid.appendChild(card);
 
-                    // Attach click listener
-                    card.addEventListener('click', () => {
-                        modalTitle.textContent = item.title;
-                        modalDate.textContent = item.date;
-                        modalCapacity.textContent = item.capacity;
-                        modalDesc.textContent = item.desc;
+                        // Attach click listener
+                        card.addEventListener('click', () => {
+                            modalTitle.textContent = item.title;
+                            modalDate.textContent = item.date;
+                            modalCapacity.textContent = item.capacity;
+                            modalDesc.textContent = item.desc;
 
-                        const modalImg = document.getElementById('modal-image');
-                        const modalVideoContainer = document.getElementById('modal-video-container');
+                            const modalImg = document.getElementById('modal-image');
+                            const modalVideoContainer = document.getElementById('modal-video-container');
 
-                        // 處理圖片顯示邏輯
-                        if (item.image) {
-                            modalImg.src = item.image;
-                            modalImg.style.display = 'block';
-                        } else {
-                            modalImg.src = '';
-                            modalImg.style.display = 'none';
-                        }
+                            // 處理圖片顯示邏輯
+                            if (item.image) {
+                                modalImg.src = item.image;
+                                modalImg.style.display = 'block';
+                            } else {
+                                modalImg.src = '';
+                                modalImg.style.display = 'none';
+                            }
 
-                        // 處理影片顯示邏輯
-                        if (item.video) {
-                            modalIframe.src = `https://www.youtube.com/embed/${item.video}`;
-                            modalVideoContainer.style.display = 'block';
+                            // 處理影片顯示邏輯
+                            if (item.video) {
+                                modalIframe.src = `https://www.youtube.com/embed/${item.video}`;
+                                modalVideoContainer.style.display = 'block';
 
-                            // 為了美觀，如果有影片也有圖片，讓圖片加上一點下邊距
-                            modalImg.style.marginBottom = item.image ? '15px' : '0';
-                        } else {
-                            modalIframe.src = '';
-                            modalVideoContainer.style.display = 'none';
-                            modalImg.style.marginBottom = '0';
-                        }
+                                // 為了美觀，如果有影片也有圖片，讓圖片加上一點下邊距
+                                modalImg.style.marginBottom = item.image ? '15px' : '0';
+                            } else {
+                                modalIframe.src = '';
+                                modalVideoContainer.style.display = 'none';
+                                modalImg.style.marginBottom = '0';
+                            }
 
-                        caseModal.style.display = 'block';
-                        setTimeout(() => {
-                            caseModal.classList.add('show');
-                        }, 10);
-                        document.body.style.overflow = 'hidden';
+                            caseModal.style.display = 'block';
+                            setTimeout(() => {
+                                caseModal.classList.add('show');
+                            }, 10);
+                            document.body.style.overflow = 'hidden';
+                        });
                     });
+
+                    // Render page numbers
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.className = `page-btn ${i === page ? 'active' : ''}`;
+                        btn.textContent = i;
+                        btn.addEventListener('click', () => {
+                            currentPage = i;
+                            renderCases(currentPage);
+                        });
+                        casesPageNumbers.appendChild(btn);
+                    }
+
+                    // Update prev/next button states
+                    casesPrevBtn.disabled = page === 1;
+                    casesNextBtn.disabled = page === totalPages;
+                }
+
+                // Initial render
+                renderCases(currentPage);
+
+                // Prev/Next Events
+                casesPrevBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderCases(currentPage);
+                    }
+                });
+
+                casesNextBtn.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderCases(currentPage);
+                    }
                 });
             })
             .catch(error => console.error('Error fetching cases:', error));

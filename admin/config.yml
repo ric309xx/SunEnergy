@@ -5,6 +5,18 @@ backend:
 media_folder: "images"
 public_folder: "images"
 
+# 啟用上傳前自動圖片壓縮 (在瀏覽器端處理，加速上傳並節省空間)
+media_library:
+  name: uploadcare # 或使用預設的 media_library 並設定 image_processing
+  config:
+    publicKey: demopublickey
+    
+# 如果不使用外部服務，可以直接使用 Decap CMS 內建的簡單壓縮：
+# (Decap CMS v3 以上支援以下設定，它會在瀏覽器端用 Canvas 縮小圖片)
+image_processing:
+  limit: 1024 # 將圖片寬高限制在 1024px 以內
+  quality: 0.8 # 壓縮品質設定為 80%
+
 collections:
   - name: "site_content"
     label: "網站內容管理"
