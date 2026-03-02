@@ -9,7 +9,7 @@ collections:
   - name: "site_content"
     label: "網站內容管理"
     editor:
-      preview: false # 關閉右側容易讓人困惑的預覽窗格，變成全版面填寫表單
+      preview: true # 開啟預覽，準備套用客製化預覽樣式
     files:
       - name: "news"
         label: "最新消息 (編輯區)"

@@ -1219,7 +1219,7 @@ img {
     height: 100%;
 }
 
-.schematic-wrapper::after {
+.schematic-wrapper.schematic::after {
     content: '示意圖';
     position: absolute;
     top: 50%;
@@ -1254,7 +1254,7 @@ img {
 
 
 /* Schematic Overlay Refinement (Step 208) */
-.schematic-wrapper::after {
+.schematic-wrapper.schematic::after {
     font-size: 2rem !important;
     /* Smaller font */
     color: rgba(255, 255, 255, 0.4) !important;
@@ -1287,7 +1287,7 @@ img {
 
 
 /* Schematic Overlay Final Tweak (Step 221) */
-.schematic-wrapper::after {
+.schematic-wrapper.schematic::after {
     font-size: 1.5rem !important;
     /* Even smaller */
     color: rgba(255, 255, 255, 0.25) !important;

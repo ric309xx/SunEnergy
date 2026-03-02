@@ -12,6 +12,81 @@
 <body>
     <!-- 引入 Decap CMS 核心程式 -->
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script>
+        // 載入主網站的 CSS 到預覽視窗中
+        CMS.registerPreviewStyle("../css/style.css");
+
+        // 定義自訂預覽元件
+        var SiteContentPreview = createClass({
+            render: function () {
+                var entry = this.props.entry;
+                var file = entry.get('slug'); // 取得目前是編輯哪個檔案 (news 或 cases)
+                var items = entry.getIn(['data', 'items']); // 取得列表資料
+
+                if (!items) {
+                    return h('div', { style: { padding: '40px', color: '#fff', background: '#0a192f', minHeight: '100vh' } }, "正在建立新資料...");
+                }
+
+                if (file === 'news') {
+                    return h('div', { className: 'news-grid', style: { padding: '40px', background: '#0a192f', minHeight: '100vh' } },
+                        items.map(function (item, index) {
+                            var img = this.props.getAsset(item.get('img'));
+                            var source = item.get('source');
+                            var isSchematic = item.get('is_schematic');
+                            var schematicClass = isSchematic ? 'schematic' : '';
+                            var sourceHTML = source ? h('span', { className: 'image-source' }, '圖片來源：' + source) : null;
+
+                            return h('div', { className: 'news-card', key: index, style: { pointerEvents: 'none' } },
+                                h('div', { className: 'news-header' },
+                                    h('span', { className: 'news-date' }, item.get('date') ? item.get('date').toString() : ''),
+                                    h('span', { className: 'news-tag' }, item.get('tag'))
+                                ),
+                                h('div', { className: 'news-body' },
+                                    h('h3', { className: 'news-title' }, item.get('title')),
+                                    h('p', { className: 'news-desc' }, item.get('text'))
+                                ),
+                                h('div', { className: 'news-image' },
+                                    h('div', { className: 'schematic-wrapper ' + schematicClass },
+                                        img ? h('img', { src: img.toString() }) : null
+                                    ),
+                                    sourceHTML
+                                )
+                            );
+                        }.bind(this)).toArray()
+                    );
+                } else if (file === 'cases') {
+                    return h('div', { className: 'cases-grid reveal active', style: { padding: '40px', background: '#0a192f', minHeight: '100vh', opacity: 1, transform: 'none' } },
+                        items.map(function (item, index) {
+                            var img = this.props.getAsset(item.get('image'));
+                            var isSchematic = item.get('is_schematic');
+                            var schematicClass = isSchematic ? 'schematic' : '';
+
+                            return h('div', { className: 'case-card', key: index, style: { pointerEvents: 'none' } },
+                                h('div', { className: 'case-thumb' },
+                                    h('div', { className: 'schematic-wrapper ' + schematicClass },
+                                        img ? h('img', { src: img.toString() }) : null
+                                    ),
+                                    h('div', { className: 'case-overlay' },
+                                        h('span', null, '查看詳情')
+                                    )
+                                ),
+                                h('div', { className: 'case-info' },
+                                    h('h3', null, item.get('title')),
+                                    h('p', { className: 'case-brief' }, item.get('brief')),
+                                    h('button', { className: 'btn-text text-small' }, '了解更多 →')
+                                )
+                            );
+                        }.bind(this)).toArray()
+                    );
+                }
+
+                return h('div', null, "未知的預覽格式");
+            }
+        });
+
+        // 將自訂預覽套用至 site_content 群組
+        CMS.registerPreviewTemplate("site_content", SiteContentPreview);
+    </script>
 </body>
 
 </html>
