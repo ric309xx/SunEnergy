@@ -409,60 +409,9 @@ img {
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Service Card Hover Animations */
-.service-card:nth-child(1):hover .service-icon img {
-    /* 太陽能板：微微浮動加上光暈旋轉感 */
-    animation: sun-pulse 2s infinite ease-in-out;
-}
-
-.service-card:nth-child(2):hover .service-icon img {
-    /* 風力發電機：旋轉動畫 */
-    animation: wind-spin 3s infinite linear;
-}
-
-.service-card:nth-child(3):hover .service-icon img {
-    /* 儲能電池：上下充電跳動感 */
-    animation: battery-bounce 1.5s infinite ease-in-out;
-}
-
-@keyframes sun-pulse {
-    0% {
-        transform: scale(1);
-        filter: brightness(1) drop-shadow(0 0 0 rgba(255, 193, 7, 0));
-    }
-
-    50% {
-        transform: scale(1.1);
-        filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));
-    }
-
-    100% {
-        transform: scale(1);
-        filter: brightness(1) drop-shadow(0 0 0 rgba(255, 193, 7, 0));
-    }
-}
-
-@keyframes wind-spin {
-    from {
-        transform: rotate(0deg) scale(1.1);
-    }
-
-    to {
-        transform: rotate(360deg) scale(1.1);
-    }
-}
-
-@keyframes battery-bounce {
-
-    0%,
-    100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-8px) scale(1.05);
-        filter: drop-shadow(0 5px 5px rgba(46, 204, 113, 0.4));
-    }
+/* Service Card Hover Animations - Simply Scale Up */
+.service-card:hover .service-icon img {
+    transform: scale(1.15);
 }
 
 .service-card h3 {

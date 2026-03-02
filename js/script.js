@@ -89,26 +89,52 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('data/cases.json')
             .then(response => response.json())
             .then(data => {
-                let casesData = data.items || [];
+                // 反轉陣列，讓最新上傳的顯示在最前面
+                let casesData = data.items ? [...data.items].reverse() : [];
 
                 // --- 分頁變數設定 ---
                 const itemsPerPage = 3;
                 let currentPage = 1;
-                const totalPages = Math.ceil(casesData.length / itemsPerPage);
 
-                const casesPagination = document.getElementById('cases-pagination');
-                const casesPrevBtn = document.getElementById('cases-prev-btn');
-                const casesNextBtn = document.getElementById('cases-next-btn');
-                const casesPageNumbers = document.getElementById('cases-page-numbers');
+                function renderPagination() {
+                    const existingPagination = document.getElementById('cases-pagination-container');
+                    if (existingPagination) existingPagination.remove();
 
-                // 如果項目超過 3 個，就顯示分頁元件
-                if (casesData.length > itemsPerPage) {
-                    casesPagination.style.display = 'flex';
+                    const totalPages = Math.ceil(casesData.length / itemsPerPage);
+                    if (totalPages <= 1) return;
+
+                    const paginationContainer = document.createElement('div');
+                    paginationContainer.id = 'cases-pagination-container';
+                    paginationContainer.style.textAlign = 'center';
+                    paginationContainer.style.marginTop = '40px';
+                    paginationContainer.style.display = 'flex';
+                    paginationContainer.style.justifyContent = 'center';
+                    paginationContainer.style.gap = '10px';
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.textContent = i;
+                        btn.className = `btn-secondary ${i === currentPage ? 'active' : ''}`;
+                        btn.style.padding = '5px 15px';
+                        btn.style.cursor = 'pointer';
+
+                        // 非當前頁加上半透明與 Hover 效果
+                        if (i !== currentPage) {
+                            btn.style.opacity = '0.6';
+                        }
+
+                        btn.onclick = () => {
+                            currentPage = i;
+                            renderCases(currentPage);
+                        };
+                        paginationContainer.appendChild(btn);
+                    }
+                    casesGrid.parentNode.appendChild(paginationContainer);
                 }
 
                 function renderCases(page) {
                     casesGrid.innerHTML = '';
-                    casesPageNumbers.innerHTML = '';
+                    renderPagination();
 
                     // 計算當前頁要顯示的陣列切片
                     const start = (page - 1) * itemsPerPage;
@@ -183,41 +209,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.body.style.overflow = 'hidden';
                         });
                     });
-
-                    // Render page numbers
-                    for (let i = 1; i <= totalPages; i++) {
-                        const btn = document.createElement('button');
-                        btn.className = `page-btn ${i === page ? 'active' : ''}`;
-                        btn.textContent = i;
-                        btn.addEventListener('click', () => {
-                            currentPage = i;
-                            renderCases(currentPage);
-                        });
-                        casesPageNumbers.appendChild(btn);
-                    }
-
-                    // Update prev/next button states
-                    casesPrevBtn.disabled = page === 1;
-                    casesNextBtn.disabled = page === totalPages;
                 }
 
                 // Initial render
                 renderCases(currentPage);
-
-                // Prev/Next Events
-                casesPrevBtn.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        renderCases(currentPage);
-                    }
-                });
-
-                casesNextBtn.addEventListener('click', () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        renderCases(currentPage);
-                    }
-                });
             })
             .catch(error => console.error('Error fetching cases:', error));
     }
