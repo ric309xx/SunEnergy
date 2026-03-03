@@ -1,6 +1,15 @@
 {
   "items": [
     {
+      "is_schematic": false,
+      "title": "案場標題",
+      "date": "完工日期 / 狀態",
+      "capacity": "建置容量",
+      "image": "images/contact-side.jpg",
+      "brief": "首頁簡短描述 (卡片顯示)",
+      "desc": "彈窗詳細描述 (點擊後顯示)"
+    },
+    {
       "title": "科技大廠屋頂型太陽能光電系統",
       "date": "2024年12月完工",
       "capacity": "1,998.56 kWp",
@@ -26,15 +35,6 @@
       "video": "",
       "brief": "創新的一地兩用模式，達成養殖與綠能雙贏，帶動地方產業升級。",
       "desc": "台南地區漁電共生專案，在不影響養殖作業的前提下架設太陽能板。透過智能溫控與遮陽設計，反而能提升特定養殖物種的存活率與產量。"
-    },
-    {
-      "is_schematic": false,
-      "title": "案場標題",
-      "date": "完工日期 / 狀態",
-      "capacity": "建置容量",
-      "image": "images/contact-side.jpg",
-      "brief": "首頁簡短描述 (卡片顯示)",
-      "desc": "彈窗詳細描述 (點擊後顯示)"
     }
   ]
 }
