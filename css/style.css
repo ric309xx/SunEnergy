@@ -900,8 +900,60 @@ img {
     }
 }
 
+.contact-form-new {
+    width: 100%;
+}
+
 .contact-form-new .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.contact-form-new label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.form-group.half {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.contact-form-new input,
+.contact-form-new textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-form-new input:focus,
+.contact-form-new textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+.contact-form-new input::placeholder,
+.contact-form-new textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 /* Responsive Contact */

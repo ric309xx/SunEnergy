@@ -194,21 +194,35 @@
                             class="fas fa-arrow-right"></i></button>
 
                     <!-- Hidden Form (Shows on click) -->
-                    <div id="contact-form-container" class="contact-form-container hidden-form">
-                        <form class="contact-form-new" action="#" method="POST">
-                            <div class="form-group">
-                                <input type="text" placeholder="您的姓名" required>
+                    <div id="contact-form-container" class="contact-form-container hidden-form form-expanded">
+                        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+                            class="contact-form-new">
+                            <input type="hidden" name="form-name" value="contact" />
+                            <p class="hidden" style="display: none;">
+                                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
+
+                            <div class="form-group-row">
+                                <div class="form-group half">
+                                    <label for="name">您的姓名</label>
+                                    <input type="text" id="name" name="name" placeholder="王大明" required>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="phone">聯絡電話</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="0912-345-678" required>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="電子郵件" required>
+                                <label for="email">電子郵件 (選填)</label>
+                                <input type="email" id="email" name="email" placeholder="example@gmail.com">
                             </div>
                             <div class="form-group">
-                                <input type="tel" placeholder="聯絡電話" required>
+                                <label for="message">備註或想諮詢的細節</label>
+                                <textarea id="message" name="message" rows="4" placeholder="例如：我想了解自家屋頂是否適合建置太陽能，地址是..."
+                                    required></textarea>
                             </div>
-                            <div class="form-group">
-                                <textarea rows="3" placeholder="備註或想諮詢的細節..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary btn-block">送出申請</button>
+                            <button type="submit" class="btn-primary btn-block"
+                                style="margin-top: 15px;">送出免費諮詢申請</button>
                         </form>
                     </div>
                 </div>
