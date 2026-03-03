@@ -51,6 +51,19 @@
 - **按鈕材質與形狀更新**：將 `.btn-primary` 改為實心黑白配色與高級膠囊圓角，`.btn-secondary` 替換為帶有 `backdrop-filter` 模糊邊界的無框毛玻璃效果。
 - **側邊浮動欄升級**：將右側 `.floating-sidebar` 轉為深色半透明加上 `blur` 的高級感設計，更符合高階企業品牌形象。
 
+### 5. CMS 介面與前端顯示同步
+- **移除前端陣列反向讀取**：因 Decap CMS 預設新增資料於最末端，將 `script.js` 取消 `reverse()` 反轉，改為忠實呈現後台拖曳順序（新 -> 舊）。
+- **簡化 Admin 入口介面**：移除預設漸層背景，改用「白底深色字 + 圓角小陰影」的極簡設計，提升專業度。
+
+### 6. 聯絡我們 (Contact) 表單升級與收件整合
+- **導入 Netlify Forms 機制**：為原本寫死於 HTML 的 `<form>` 加入 `data-netlify="true"` 與防機器的 `netlify-honeypot` 屬性，結合 Netlify 設定自動將實體表單資料轉發至 `ric309xx@gmail.com`。
+- **排版寬度與高質感樣式修改**：
+  - 解除 `.contact-split` 寬度限制 (`max-width: 1000px;`)，使其拉寬齊平整體視覺版面。
+  - 將輸入框改為「雙欄並排」並加入 Apple-style 半透明毛玻璃 (`backdrop-filter`) 樣式與 Focus 黃色光暈特效。
+
+### 7. 工作流程自動化
+- **建立 `/wrapup` 斜線指令**：用以在工作告一段落時，自動結算與更新 `CHANGELOG.md`、`task.md`、`timesheet.md` 等進度與工時計費檔案。
+
 ---
 > 📝 **維護備註**
 > 此紀錄檔會持續更新，若有新增的修改項目，請以上方日期格式依序疊加添加。

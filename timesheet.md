@@ -8,8 +8,8 @@
 | **2026-03-02** | 系統基礎與 CMS 導入 | 3 小時 | Antigravity AI | - 建立 admin 後台介面與設定檔<br>- 實作 cases 與 news 雙重 JSON 模組化資料結構<br>- 設定 GitHub 自動化版本控制與 Netlify 部署 |
 | **2026-03-02** | 前端 CSS/JS 大幅翻修 | 2 小時 | Antigravity AI | - 樣式全局升級 (Apple Premium style)<br>- 改寫 Hero 影片背景透明度<br>- 把寫死的 HTML 改為 JS Fetch 動態渲染 |
 | **2026-03-03** | 功能修復與使用者體驗優化 | 1.5 小時 | Antigravity AI | - 修復 Uploadcare 上傳套件之 API_ERROR<br>- 實作實績案例「全新分頁系統」與反向排序機制<br>- 服務區塊圖標微調與無伺服器配置更新 |
-| **2026-03-03** | 專案移交管理文件撰寫 | 0.5 小時 | Antigravity AI | - 撰寫 `CHANGELOG.md` 紀錄系統技術棧<br>- 建立 `task.md` 與對齊報價單項目 (`timesheet.md`) |
-| **總計** | **第一階段架構搭建與優化** | **7 小時** | - | *此為自動估算之開發投入時數* |
+| **2026-03-03** | 聯絡表單升級與工作流建置 | 2 小時 | Antigravity AI | - 設計 Apple 質感表單與串接 Netlify Forms<br>- 同步 CMS 資料排序邏輯與簡化介面<br>- 建立 `/wrapup` 自動結算流程 |
+| **總計** | **第一階段架構搭建與優化** | **9 小時** | - | *此為自動估算之開發投入時數* |
 
 ## 二、專案費用與收支紀錄 (Project Expenses)
 
