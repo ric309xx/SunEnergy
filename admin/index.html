@@ -8,46 +8,52 @@
     <!-- 引入 Netlify Identity Widget，這是登入後台的關鍵 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
-        /* 客製化 Decap CMS 首頁儀表板的選單卡片，解決預設空白的問題 */
+        /* 客製化 Decap CMS 首頁儀表板的選單卡片，簡化清晰版 */
         a[href*="entries/cases"] {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364) !important;
-            color: white !important;
-            border-radius: 12px !important;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
-            border: none !important;
+            background: #ffffff !important;
+            color: #1e293b !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 20px !important;
         }
 
         a[href*="entries/cases"] h2 {
-            color: #ffc107 !important;
+            color: #0f172a !important;
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
         }
 
         a[href*="entries/cases"]::after {
-            content: "📸 管理所有的太陽能實績案場、相片與 YouTube 影片";
+            content: "📸 編輯所有太陽能實績、照片與 YouTube 影片";
             display: block;
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 14px;
-            color: #e2e8f0;
+            color: #64748b;
             line-height: 1.5;
         }
 
         a[href*="entries/news"] {
-            background: linear-gradient(135deg, #1e3c72, #2a5298) !important;
-            color: white !important;
-            border-radius: 12px !important;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
-            border: none !important;
+            background: #ffffff !important;
+            color: #1e293b !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 20px !important;
         }
 
         a[href*="entries/news"] h2 {
-            color: #64b5f6 !important;
+            color: #0f172a !important;
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
         }
 
         a[href*="entries/news"]::after {
-            content: "📰 發布最新的綠能相關動態、最新消息與活動紀錄";
+            content: "📰 發布最新綠能動態、消息與活動紀錄";
             display: block;
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 14px;
-            color: #e2e8f0;
+            color: #64748b;
             line-height: 1.5;
         }
     </style>

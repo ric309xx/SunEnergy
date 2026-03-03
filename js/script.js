@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('data/cases.json')
             .then(response => response.json())
             .then(data => {
-                // 反轉陣列，讓最新上傳的顯示在最前面
-                let casesData = data.items ? [...data.items].reverse() : [];
+                // 不反轉陣列，與 CMS 編輯後台管理順序保持一致
+                let casesData = data.items || [];
 
                 // --- 分頁變數設定 ---
                 const itemsPerPage = 3;
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 }
 
-                // Initial render
+                // Initial render ( cases 預設顯示第一頁，不反向 )
                 renderCases(currentPage);
             })
             .catch(error => console.error('Error fetching cases:', error));
