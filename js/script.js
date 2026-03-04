@@ -185,29 +185,60 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.getElementById('modal-date').textContent = item.date || '-';
                             document.getElementById('modal-capacity').textContent = item.capacity || '-';
 
-                            // 擷取減碳量(若有提及)
-                            const descText = item.desc || '';
-                            const co2Match = descText.match(/減[\u4e00-\u9fa5]*?([約\d,]+)\s*噸碳/i);
-                            const co2Card = document.getElementById('modal-co2-card');
-                            if (co2Match) {
-                                document.getElementById('modal-co2').textContent = `${co2Match[1]} 噸`;
-                                co2Card.style.display = 'flex';
+                            // 計算年發電量 (解析容量數字 * 1100度)
+                            const generationCard = document.getElementById('modal-generation-card');
+                            if (item.capacity) {
+                                // 移除所有非數字與小數點的字元
+                                const capNumber = parseFloat(item.capacity.replace(/[^\d.]/g, ''));
+                                if (!isNaN(capNumber)) {
+                                    const expectedGen = Math.round(capNumber * 1100);
+                                    document.getElementById('modal-generation').textContent = `約 ${expectedGen.toLocaleString()} 度`;
+                                    generationCard.style.display = 'flex';
+                                } else {
+                                    generationCard.style.display = 'none';
+                                }
                             } else {
-                                co2Card.style.display = 'none';
+                                generationCard.style.display = 'none';
                             }
 
                             // 處理文字換行
+                            const descText = item.desc || '';
                             document.getElementById('modal-desc').innerHTML = descText.replace(/\n/g, '<br>');
 
                             const modalImg = document.getElementById('modal-image');
                             const modalMediaContainer = document.getElementById('modal-media-container');
+                            const modalGalleryThumbs = document.getElementById('modal-gallery-thumbs');
                             const modalVideoContainer = document.getElementById('modal-video-container');
 
-                            // 處理圖片顯示邏輯
-                            if (item.image) {
-                                modalImg.src = item.image;
+                            // 處理圖片顯示與相簿輪播邏輯
+                            modalGalleryThumbs.innerHTML = '';
+                            let allImages = [];
+                            if (item.image) allImages.push(item.image);
+                            if (item.gallery && Array.isArray(item.gallery)) {
+                                allImages = allImages.concat(item.gallery);
+                            }
+
+                            if (allImages.length > 0) {
+                                modalImg.src = allImages[0];
                                 modalImg.style.display = 'block';
                                 modalMediaContainer.style.display = 'flex';
+
+                                if (allImages.length > 1) {
+                                    modalGalleryThumbs.style.display = 'flex';
+                                    allImages.forEach((imgSrc, idx) => {
+                                        const thumb = document.createElement('img');
+                                        thumb.className = 'thumb-img' + (idx === 0 ? ' active' : '');
+                                        thumb.src = imgSrc;
+                                        thumb.onclick = () => {
+                                            modalImg.src = imgSrc;
+                                            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+                                            thumb.classList.add('active');
+                                        };
+                                        modalGalleryThumbs.appendChild(thumb);
+                                    });
+                                } else {
+                                    modalGalleryThumbs.style.display = 'none';
+                                }
                             } else {
                                 modalImg.src = '';
                                 modalImg.style.display = 'none';

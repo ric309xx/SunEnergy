@@ -118,7 +118,6 @@
     <section id="process" class="section process">
         <div class="container pb-0">
             <div class="section-header text-center reveal">
-                <span class="process-subtitle">Service Process</span>
                 <h2 class="section-title">服務流程</h2>
             </div>
             <div class="timeline-container reveal delay-1">
@@ -328,9 +327,15 @@
 
                 <!-- 左右排版主區塊 -->
                 <div class="split-layout">
-                    <!-- 左欄：大張相片 -->
+                    <!-- 左欄：大張相片與多圖相簿 -->
                     <div class="split-left" id="modal-media-container">
-                        <img id="modal-image" src="" alt="案場照片" style="display: none;">
+                        <!-- 縮圖列 (當有多張相片時顯示) -->
+                        <div class="modal-gallery-thumbs" id="modal-gallery-thumbs" style="display: none;"></div>
+
+                        <!-- 主視圖 -->
+                        <div class="modal-main-image-wrapper">
+                            <img id="modal-image" src="" alt="案場照片" style="display: none;">
+                        </div>
                     </div>
 
                     <!-- 右欄：標題、數據、描述 -->
@@ -364,21 +369,33 @@
                                     <strong id="modal-co2" class="row-value">-</strong>
                                 </div>
                             </div>
+
+                            <!-- 年發電量：獨立突出版 -->
+                            <div class="generation-card" id="modal-generation-card" style="display: none;">
+                                <i class="fa-solid fa-bolt-lightning gen-icon"></i>
+                                <div class="gen-info">
+                                    <span class="gen-label">預估年發電量</span>
+                                    <strong id="modal-generation" class="gen-value">-</strong>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 描述區 -->
                         <div class="split-desc">
-                            <h3 class="desc-heading">Project Insights</h3>
+                            <h3 class="desc-heading">案件說明</h3>
                             <p id="modal-desc" class="desc-text">內容描述...</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 底部滿版：宣傳影片 -->
-                <div class="video-wrapper full-width-video" id="modal-video-container" style="display: none;">
-                    <iframe id="modal-iframe" src="" frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                <!-- 底部：相關影片 (非滿版、置中) -->
+                <div class="video-section-wrapper" id="modal-video-container" style="display: none;">
+                    <h4 class="video-section-title">相關影片</h4>
+                    <div class="centered-video">
+                        <iframe id="modal-iframe" src="" frameborder="0"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
                 </div>
 
             </div>

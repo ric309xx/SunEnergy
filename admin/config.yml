@@ -26,7 +26,8 @@ collections:
               - {label: "案場標題", name: "title", widget: "string"}
               - {label: "完工日期 / 狀態", name: "date", widget: "string"}
               - {label: "建置容量", name: "capacity", widget: "string", hint: "例如：1,998.56 kWp"}
-              - {label: "封面圖片", name: "image", widget: "image"}
+              - {label: "封面圖片 (主圖)", name: "image", widget: "image"}
+              - {label: "更多相片 (選填，左側縮圖列)", name: "gallery", widget: "list", required: false, field: {label: "相片", name: "image", widget: "image"}}
               - {label: "顯示『示意圖』文字標籤", name: "is_schematic", widget: "boolean", default: false, required: false, hint: "勾選後，首頁圖片上會疊加半透明的示意圖文字"}
               - {label: "Youtube 影片 ID", name: "video", widget: "string", required: false, hint: "如果有宣傳影片，請填寫影片網址 v= 後面的英數字串"}
               - {label: "首頁簡短描述 (卡片顯示)", name: "brief", widget: "string"}
