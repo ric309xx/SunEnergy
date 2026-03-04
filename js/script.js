@@ -172,34 +172,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // Attach click listener
                         card.addEventListener('click', () => {
-                            modalTitle.textContent = item.title;
-                            modalDate.textContent = item.date;
-                            modalCapacity.textContent = item.capacity;
-                            modalDesc.textContent = item.desc;
+                            document.getElementById('modal-title').textContent = item.title || '';
+
+                            const subtitleEl = document.getElementById('modal-subtitle');
+                            if (item.brief) {
+                                subtitleEl.textContent = item.brief;
+                                subtitleEl.style.display = 'block';
+                            } else {
+                                subtitleEl.style.display = 'none';
+                            }
+
+                            document.getElementById('modal-date').textContent = item.date || '-';
+                            document.getElementById('modal-capacity').textContent = item.capacity || '-';
+
+                            // 擷取減碳量(若有提及)
+                            const descText = item.desc || '';
+                            const co2Match = descText.match(/減[\u4e00-\u9fa5]*?([約\d,]+)\s*噸碳/i);
+                            const co2Card = document.getElementById('modal-co2-card');
+                            if (co2Match) {
+                                document.getElementById('modal-co2').textContent = `${co2Match[1]} 噸`;
+                                co2Card.style.display = 'flex';
+                            } else {
+                                co2Card.style.display = 'none';
+                            }
+
+                            // 處理文字換行
+                            document.getElementById('modal-desc').innerHTML = descText.replace(/\n/g, '<br>');
 
                             const modalImg = document.getElementById('modal-image');
+                            const showcaseContainer = document.getElementById('modal-showcase-container');
                             const modalVideoContainer = document.getElementById('modal-video-container');
 
                             // 處理圖片顯示邏輯
                             if (item.image) {
                                 modalImg.src = item.image;
                                 modalImg.style.display = 'block';
+                                showcaseContainer.style.display = 'flex'; // 恢復 flex 佈局
                             } else {
                                 modalImg.src = '';
                                 modalImg.style.display = 'none';
+                                showcaseContainer.style.display = 'block'; // 無圖時改為一般 block 排版
                             }
 
                             // 處理影片顯示邏輯
                             if (item.video) {
-                                modalIframe.src = `https://www.youtube.com/embed/${item.video}`;
+                                document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${item.video}`;
                                 modalVideoContainer.style.display = 'block';
-
-                                // 為了美觀，如果有影片也有圖片，讓圖片加上一點下邊距
-                                modalImg.style.marginBottom = item.image ? '15px' : '0';
                             } else {
-                                modalIframe.src = '';
+                                document.getElementById('modal-iframe').src = '';
                                 modalVideoContainer.style.display = 'none';
-                                modalImg.style.marginBottom = '0';
                             }
 
                             caseModal.style.display = 'block';

@@ -244,27 +244,59 @@
         </div>
     </footer>
 
-    <!-- Case Study Modal -->
-    <div id="case-modal" class="modal">
-        <div class="modal-content">
+    <!-- Premium Case Study Modal -->
+    <div id="case-modal" class="modal premium-modal">
+        <div class="modal-content premium-content">
             <span class="close-btn">&times;</span>
-            <div class="modal-body">
-                <div class="modal-media" id="modal-media-container">
-                    <img id="modal-image" src="" alt="案場照片"
-                        style="width: 100%; height: auto; display: none; object-fit: cover; border-radius: 8px;">
-                </div>
-                <div class="modal-text">
+            <div class="modal-body premium-body">
+
+                <!-- 標題區 -->
+                <div class="premium-header">
                     <span class="modal-badge">完工實績</span>
-                    <h2 id="modal-title">標題</h2>
-                    <ul class="modal-meta">
-                        <li><strong>完工日期：</strong> <span id="modal-date">-</span></li>
-                        <li><strong>建置容量：</strong> <span id="modal-capacity">-</span></li>
-                    </ul>
-                    <p id="modal-desc">內容描述...</p>
+                    <h2 id="modal-title" class="premium-title">標題</h2>
+                    <p id="modal-subtitle" class="premium-subtitle"></p>
                 </div>
-                <!-- 影片移到內文最下方 -->
-                <div class="video-container" id="modal-video-container"
-                    style="display: none; margin-top: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+
+                <!-- 核心展示區 (左圖右文) -->
+                <div class="premium-showcase" id="modal-showcase-container">
+                    <div class="showcase-image" id="modal-media-container">
+                        <img id="modal-image" src="" alt="案場照片" style="display: none;">
+                    </div>
+                    <div class="showcase-text">
+                        <div class="showcase-text-inner">
+                            <h3 class="showcase-heading">Project Insights</h3>
+                            <p id="modal-desc" class="desc-text">內容描述...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 數據卡片區 -->
+                <div class="premium-data-cards">
+                    <div class="data-card">
+                        <div class="data-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                        <div class="data-info">
+                            <span class="data-label">完工日期</span>
+                            <strong id="modal-date" class="data-value">-</strong>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="data-info">
+                            <span class="data-label">建置容量</span>
+                            <strong id="modal-capacity" class="data-value">-</strong>
+                        </div>
+                    </div>
+                    <div class="data-card" id="modal-co2-card" style="display: none;">
+                        <div class="data-icon"><i class="fa-solid fa-leaf"></i></div>
+                        <div class="data-info">
+                            <span class="data-label">預計年減碳量</span>
+                            <strong id="modal-co2" class="data-value">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 影片區 -->
+                <div class="video-container premium-video" id="modal-video-container" style="display: none;">
                     <iframe id="modal-iframe" src="" frameborder="0"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
