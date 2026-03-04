@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (item.image) {
                                 modalImg.src = item.image;
                                 modalImg.style.display = 'block';
-                                modalMediaContainer.style.display = 'block';
+                                modalMediaContainer.style.display = 'flex';
                             } else {
                                 modalImg.src = '';
                                 modalImg.style.display = 'none';
@@ -382,5 +382,31 @@ document.querySelectorAll('.floating-sidebar .sidebar-item').forEach(item => {
     item.addEventListener('click', function (e) {
         e.preventDefault(); // Prevent link navigation
         console.log('Sidebar item clicked but disabled.');
+    });
+});
+
+// --- Scroll Reveal Animation ---
+document.addEventListener("DOMContentLoaded", function () {
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOptions = {
+        threshold: 0.15, // 元素進入視窗 15% 時觸發
+        rootMargin: "0px 0px -50px 0px" // 提早或延遲觸發的邊界
+    };
+
+    const revealOnScroll = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('active');
+                // 停止觀察已顯示的元素，讓動畫只播放一次
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    revealElements.forEach(el => {
+        revealOnScroll.observe(el);
     });
 });

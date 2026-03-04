@@ -320,84 +320,67 @@
         </div>
     </footer>
 
-    <!-- Magazine Style Case Study Modal -->
-    <div id="case-modal" class="modal mag-modal">
-        <div class="modal-content mag-content">
+    <!-- Classic Split Modal (Left Image, Right Data) -->
+    <div id="case-modal" class="modal split-modal">
+        <div class="modal-content split-content">
             <span class="close-btn">&times;</span>
-            <div class="modal-body mag-body">
+            <div class="modal-body split-body">
 
-                <!-- 標題區 -->
-                <div class="mag-header">
-                    <span class="mag-badge">完工實績</span>
-                    <h2 id="modal-title" class="mag-title">標題</h2>
-                    <p id="modal-subtitle" class="mag-subtitle"></p>
-                </div>
+                <!-- 左右排版主區塊 -->
+                <div class="split-layout">
+                    <!-- 左欄：大張相片 -->
+                    <div class="split-left" id="modal-media-container">
+                        <img id="modal-image" src="" alt="案場照片" style="display: none;">
+                    </div>
 
-                <!-- 滿版美圖 -->
-                <div class="mag-featured-image" id="modal-media-container">
-                    <img id="modal-image" src="" alt="案場照片" style="display: none;">
-                </div>
+                    <!-- 右欄：標題、數據、描述 -->
+                    <div class="split-right">
+                        <div class="split-header">
+                            <span class="split-badge">完工實績</span>
+                            <h2 id="modal-title" class="split-title">標題</h2>
+                            <p id="modal-subtitle" class="split-subtitle"></p>
+                        </div>
 
-                <div class="mag-content-split">
-                    <!-- 左/上方列：數據飾條與技術圖標 -->
-                    <div class="mag-sidebar">
-                        <div class="mag-data-box">
-                            <div class="data-item">
-                                <i class="fa-regular fa-calendar-check data-icon"></i>
-                                <div class="data-text-group">
-                                    <span class="data-label">完工日期</span>
-                                    <strong id="modal-date" class="data-value">-</strong>
+                        <!-- 數據簡潔表 -->
+                        <div class="split-data-list">
+                            <div class="data-row">
+                                <i class="fa-regular fa-calendar-check row-icon"></i>
+                                <div class="row-info">
+                                    <span class="row-label">完工日期</span>
+                                    <strong id="modal-date" class="row-value">-</strong>
                                 </div>
                             </div>
-                            <div class="data-item">
-                                <i class="fa-solid fa-bolt data-icon"></i>
-                                <div class="data-text-group">
-                                    <span class="data-label">建置容量</span>
-                                    <strong id="modal-capacity" class="data-value">-</strong>
+                            <div class="data-row">
+                                <i class="fa-solid fa-bolt row-icon"></i>
+                                <div class="row-info">
+                                    <span class="row-label">建置容量</span>
+                                    <strong id="modal-capacity" class="row-value">-</strong>
                                 </div>
                             </div>
-                            <div class="data-item" id="modal-co2-card" style="display: none;">
-                                <i class="fa-solid fa-leaf data-icon"></i>
-                                <div class="data-text-group">
-                                    <span class="data-label">預計年減碳量</span>
-                                    <strong id="modal-co2" class="data-value">-</strong>
+                            <div class="data-row" id="modal-co2-card" style="display: none;">
+                                <i class="fa-solid fa-leaf row-icon text-green"></i>
+                                <div class="row-info">
+                                    <span class="row-label">預計年減碳</span>
+                                    <strong id="modal-co2" class="row-value">-</strong>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 靜態技術亮點 (依據案場內容彈性擴充，為排版豐富度設計) -->
-                        <div class="mag-tech-list">
-                            <h4 class="tech-list-title">技術亮點</h4>
-                            <div class="tech-item">
-                                <div class="tech-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                                <div class="tech-info">
-                                    <h5>抗鹽害模組與金屬支架</h5>
-                                    <p>對抗極端氣候，確保設備在嚴苛環境下長期穩定運轉。</p>
-                                </div>
-                            </div>
-                            <div class="tech-item">
-                                <div class="tech-icon"><i class="fa-solid fa-network-wired"></i></div>
-                                <div class="tech-info">
-                                    <h5>智慧雲端監控系統</h5>
-                                    <p>即時掌握發電量與設備健康狀態，減少停機損失。</p>
-                                </div>
-                            </div>
+                        <!-- 描述區 -->
+                        <div class="split-desc">
+                            <h3 class="desc-heading">Project Insights</h3>
+                            <p id="modal-desc" class="desc-text">內容描述...</p>
                         </div>
-                    </div>
-
-                    <!-- 右側/下方列：內容解說 -->
-                    <div class="mag-main-text">
-                        <h3 class="mag-playfair-title">Project Insights</h3>
-                        <p id="modal-desc" class="desc-text">內容描述...</p>
                     </div>
                 </div>
 
-                <!-- 影片區 -->
-                <div class="video-container mag-video" id="modal-video-container" style="display: none;">
+                <!-- 底部滿版：宣傳影片 -->
+                <div class="video-wrapper full-width-video" id="modal-video-container" style="display: none;">
                     <iframe id="modal-iframe" src="" frameborder="0"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 </div>
+
             </div>
         </div>
     </div>
