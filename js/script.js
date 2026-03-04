@@ -1,22 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // --- Mobile Menu Toggle ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-list a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-            });
-        });
-    }
-
     // --- Scroll Reveal Animation ---
     const reveals = document.querySelectorAll('.reveal');
 
@@ -32,12 +15,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+    if (reveals.length > 0) {
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // trigger once on load
+    }
 
     // --- Smooth Scroll ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            if (this.classList.contains('mobile-link')) return; // handled in inline script in index.html
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
@@ -56,388 +42,315 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Case Study Modal & Dynamic Rendering Logic ---
-    const caseModal = document.getElementById('case-modal');
+    // --- Globals for Modal ---
+    const caseModal = document.getElementById('caseModal');
+    const modalContent = document.getElementById('modalContent');
+
+    window.closeModal = function () {
+        if (!caseModal) return;
+        caseModal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+
+        document.body.style.overflow = '';
+
+        // Stop video
+        const iframe = document.getElementById('modalIframe');
+        if (iframe) iframe.src = '';
+
+        setTimeout(() => {
+            caseModal.classList.add('hidden');
+            caseModal.classList.remove('flex');
+        }, 300);
+    };
+
+    if (caseModal) {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !caseModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    }
+
+    // --- Dynamic Rendering Logic for Cases ---
     const casesGrid = document.getElementById('cases-grid');
 
-    if (caseModal && casesGrid) {
-        const closeBtn = document.querySelector('.close-btn');
-        const modalIframe = document.getElementById('modal-iframe');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDate = document.getElementById('modal-date');
-        const modalCapacity = document.getElementById('modal-capacity');
-        const modalDesc = document.getElementById('modal-desc');
-
-        function closeModal() {
-            caseModal.classList.remove('show');
-            setTimeout(() => {
-                caseModal.style.display = 'none';
-                modalIframe.src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        if (closeBtn) closeBtn.addEventListener('click', closeModal);
-        window.addEventListener('click', (e) => {
-            if (e.target == caseModal) closeModal();
-        });
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && caseModal.classList.contains('show')) closeModal();
-        });
-
-        // Fetch Cases Data
+    if (casesGrid) {
         fetch('data/cases.json')
             .then(response => response.json())
             .then(data => {
-                // 不反轉陣列，與 CMS 編輯後台管理順序保持一致
-                let casesData = data.items || [];
+                let casesData = data.items ? [...data.items].reverse() : []; // 反轉最新
 
-                // --- 分頁變數設定 ---
                 const itemsPerPage = 3;
                 let currentPage = 1;
 
-                function renderPagination() {
-                    const existingPagination = document.getElementById('cases-pagination-container');
+                function renderCasesPagination() {
+                    let existingPagination = document.getElementById('cases-pagination-wrapper');
                     if (existingPagination) existingPagination.remove();
 
                     const totalPages = Math.ceil(casesData.length / itemsPerPage);
                     if (totalPages <= 1) return;
 
                     const paginationContainer = document.createElement('div');
-                    paginationContainer.id = 'cases-pagination-container';
-                    paginationContainer.style.textAlign = 'center';
-                    paginationContainer.style.marginTop = '40px';
-                    paginationContainer.style.display = 'flex';
-                    paginationContainer.style.justifyContent = 'center';
-                    paginationContainer.style.gap = '10px';
+                    paginationContainer.id = 'cases-pagination-wrapper';
+                    paginationContainer.className = 'col-span-full flex flex-wrap justify-center mt-12 gap-3 pb-8';
 
                     for (let i = 1; i <= totalPages; i++) {
                         const btn = document.createElement('button');
                         btn.textContent = i;
-                        btn.className = `btn-secondary ${i === currentPage ? 'active' : ''}`;
-                        btn.style.padding = '5px 15px';
-                        btn.style.cursor = 'pointer';
-
-                        // 非當前頁加上半透明與 Hover 效果
-                        if (i !== currentPage) {
-                            btn.style.opacity = '0.6';
+                        if (i === currentPage) {
+                            btn.className = 'w-10 h-10 rounded-full bg-yellow-400 text-black font-bold flex items-center justify-center transition shadow-[0_0_10px_rgba(255,215,0,0.3)] shadow-yellow-400/50 scale-105';
+                        } else {
+                            btn.className = 'w-10 h-10 rounded-full border border-white/20 text-gray-400 font-bold flex items-center justify-center hover:bg-white/10 hover:text-white transition';
                         }
 
                         btn.onclick = () => {
                             currentPage = i;
                             renderCases(currentPage);
+                            // Scroll to top of cases section with offset
+                            const target = document.getElementById('cases');
+                            const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 100;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                         };
                         paginationContainer.appendChild(btn);
                     }
-                    casesGrid.parentNode.appendChild(paginationContainer);
+                    casesGrid.appendChild(paginationContainer);
                 }
 
                 function renderCases(page) {
                     casesGrid.innerHTML = '';
-                    renderPagination();
 
-                    // 計算當前頁要顯示的陣列切片
                     const start = (page - 1) * itemsPerPage;
                     const end = start + itemsPerPage;
                     const pageItems = casesData.slice(start, end);
 
-                    pageItems.forEach(item => {
+                    pageItems.forEach((item, index) => {
                         const card = document.createElement('div');
-                        card.className = 'case-card';
-                        card.setAttribute('data-title', item.title || '');
-                        card.setAttribute('data-date', item.date || '');
-                        card.setAttribute('data-capacity', item.capacity || '');
-                        card.setAttribute('data-desc', item.desc || '');
-                        card.setAttribute('data-video', item.video || '');
-                        card.setAttribute('data-image', item.image || '');
+                        card.className = 'reveal delay-100 group cursor-pointer active bg-black/40 border border-white/5 rounded-2xl p-4 md:p-5 hover:border-yellow-400/30 transition duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col h-full';
 
-                        const isSchematic = item.is_schematic ? 'schematic' : '';
+                        // Handle schematic
+                        const schematicHtml = item.is_schematic ? `<div class="absolute top-3 left-3 bg-red-500/90 text-white text-[10px] font-bold tracking-widest px-2 py-1 rounded backdrop-blur z-10 uppercase">示意圖</div>` : '';
 
                         card.innerHTML = `
-                            <div class="case-thumb">
-                                <div class="schematic-wrapper ${isSchematic}">
-                                    <img src="${item.image}" alt="${item.title}">
-                                </div>
-                                <div class="case-overlay">
-                                    <span>查看詳情</span>
+                            <div class="image-zoom-container aspect-[4/3] mb-5 relative rounded-xl overflow-hidden border border-white/5 bg-[#111]">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                                ${schematicHtml}
+                                <!-- Hover Overlay -->
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10 backdrop-blur-[2px]">
+                                    <span class="px-5 py-2.5 bg-yellow-400 text-black font-bold text-sm rounded-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+                                        <iconify-icon icon="solar:maximize-square-minimalistic-bold" class="text-lg"></iconify-icon>
+                                        查看詳情
+                                    </span>
                                 </div>
                             </div>
-                            <div class="case-info">
-                                <h3>${item.title}</h3>
-                                <p class="case-brief">${item.brief}</p>
-                                <button class="btn-text text-small">了解更多 &rarr;</button>
+                            <div class="flex-grow flex flex-col">
+                                <h3 class="text-lg md:text-xl font-bold group-hover:text-yellow-400 transition leading-tight mb-2">${item.title}</h3>
+                                <p class="text-sm text-gray-500 line-clamp-2 flex-grow">${item.brief || ''}</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 pt-4 mt-4 border-t border-white/5">
+                                <div>
+                                    <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">建置容量</p>
+                                    <p class="font-bold text-sm text-gray-300">${item.capacity || '-'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-600 uppercase tracking-widest mb-1">完工狀態</p>
+                                    <p class="font-bold text-sm text-yellow-500">${item.date || '-'}</p>
+                                </div>
                             </div>
                         `;
-                        casesGrid.appendChild(card);
 
-                        // Attach click listener
+                        // Attach click listener for modal
                         card.addEventListener('click', () => {
-                            document.getElementById('modal-title').textContent = item.title || '';
+                            document.getElementById('modalImg').src = item.image || '';
+                            document.getElementById('modalDate').textContent = item.date || '-';
+                            document.getElementById('modalTitle').textContent = item.title || '';
 
-                            const subtitleEl = document.getElementById('modal-subtitle');
+                            const sub = document.getElementById('modalSubtitle');
                             if (item.brief) {
-                                subtitleEl.textContent = item.brief;
-                                subtitleEl.style.display = 'block';
+                                sub.textContent = item.brief;
+                                sub.classList.remove('hidden');
                             } else {
-                                subtitleEl.style.display = 'none';
+                                sub.classList.add('hidden');
                             }
 
-                            document.getElementById('modal-date').textContent = item.date || '-';
-                            document.getElementById('modal-capacity').textContent = item.capacity || '-';
+                            document.getElementById('modalCapacity').textContent = item.capacity || '-';
 
-                            // 計算年發電量 (解析容量數字 * 1100度)
-                            const generationCard = document.getElementById('modal-generation-card');
+                            // Generation calc
+                            const genGroup = document.getElementById('modalGenerationGroup');
                             if (item.capacity) {
-                                // 移除所有非數字與小數點的字元
                                 const capNumber = parseFloat(item.capacity.replace(/[^\d.]/g, ''));
                                 if (!isNaN(capNumber)) {
                                     const expectedGen = Math.round(capNumber * 1100);
-                                    document.getElementById('modal-generation').textContent = `約 ${expectedGen.toLocaleString()} 度`;
-                                    generationCard.style.display = 'flex';
+                                    document.getElementById('modalGeneration').textContent = `約 ${expectedGen.toLocaleString()} 度`;
+                                    genGroup.classList.remove('hidden');
                                 } else {
-                                    generationCard.style.display = 'none';
+                                    genGroup.classList.add('hidden');
                                 }
                             } else {
-                                generationCard.style.display = 'none';
+                                genGroup.classList.add('hidden');
                             }
 
-                            // 處理文字換行
+                            // Desc
                             const descText = item.desc || '';
-                            document.getElementById('modal-desc').innerHTML = descText.replace(/\n/g, '<br>');
+                            document.getElementById('modalDesc').innerHTML = descText.replace(/\n/g, '<br>');
 
-                            const modalImg = document.getElementById('modal-image');
-                            const modalMediaContainer = document.getElementById('modal-media-container');
+                            // Gallery Logic
                             const modalGalleryThumbs = document.getElementById('modal-gallery-thumbs');
-                            const modalVideoContainer = document.getElementById('modal-video-container');
-
-                            // 處理圖片顯示與相簿輪播邏輯
-                            modalGalleryThumbs.innerHTML = '';
                             let allImages = [];
                             if (item.image) allImages.push(item.image);
                             if (item.gallery && Array.isArray(item.gallery)) {
                                 allImages = allImages.concat(item.gallery);
                             }
 
-                            if (allImages.length > 0) {
-                                modalImg.src = allImages[0];
-                                modalImg.style.display = 'block';
-                                modalMediaContainer.style.display = 'flex';
-
-                                if (allImages.length > 1) {
-                                    modalGalleryThumbs.style.display = 'flex';
-                                    allImages.forEach((imgSrc, idx) => {
-                                        const thumb = document.createElement('img');
-                                        thumb.className = 'thumb-img' + (idx === 0 ? ' active' : '');
-                                        thumb.src = imgSrc;
-                                        thumb.onclick = () => {
-                                            modalImg.src = imgSrc;
-                                            document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
-                                            thumb.classList.add('active');
-                                        };
-                                        modalGalleryThumbs.appendChild(thumb);
-                                    });
-                                } else {
-                                    modalGalleryThumbs.style.display = 'none';
-                                }
+                            if (allImages.length > 1) {
+                                modalGalleryThumbs.innerHTML = '';
+                                modalGalleryThumbs.classList.remove('hidden');
+                                allImages.forEach((imgSrc, idx) => {
+                                    const th = document.createElement('div');
+                                    th.className = `w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-lg overflow-hidden cursor-pointer border-2 transition-all ${idx === 0 ? 'border-yellow-400 opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}`;
+                                    th.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover">`;
+                                    th.onclick = () => {
+                                        document.getElementById('modalImg').src = imgSrc;
+                                        Array.from(modalGalleryThumbs.children).forEach(c => {
+                                            c.classList.add('border-transparent', 'opacity-60');
+                                            c.classList.remove('border-yellow-400', 'opacity-100');
+                                        });
+                                        th.classList.remove('border-transparent', 'opacity-60');
+                                        th.classList.add('border-yellow-400', 'opacity-100');
+                                    };
+                                    modalGalleryThumbs.appendChild(th);
+                                });
                             } else {
-                                modalImg.src = '';
-                                modalImg.style.display = 'none';
-                                modalMediaContainer.style.display = 'none';
+                                modalGalleryThumbs.classList.add('hidden');
+                                modalGalleryThumbs.innerHTML = '';
                             }
 
-                            // 處理影片顯示邏輯
+                            // Video
+                            const videoCont = document.getElementById('modalVideoContainer');
                             if (item.video) {
-                                document.getElementById('modal-iframe').src = `https://www.youtube.com/embed/${item.video}`;
-                                modalVideoContainer.style.display = 'block';
+                                document.getElementById('modalIframe').src = `https://www.youtube.com/embed/${item.video}`;
+                                videoCont.classList.remove('hidden');
                             } else {
-                                document.getElementById('modal-iframe').src = '';
-                                modalVideoContainer.style.display = 'none';
+                                document.getElementById('modalIframe').src = '';
+                                videoCont.classList.add('hidden');
                             }
 
-                            caseModal.style.display = 'block';
-                            setTimeout(() => {
-                                caseModal.classList.add('show');
-                            }, 10);
+                            // Show modal
+                            caseModal.classList.remove('hidden');
+                            caseModal.classList.add('flex');
                             document.body.style.overflow = 'hidden';
+
+                            // Trigger anim
+                            void caseModal.offsetWidth;
+                            caseModal.classList.remove('opacity-0');
+                            modalContent.classList.remove('scale-95');
+                            modalContent.classList.add('scale-100');
                         });
+
+                        casesGrid.appendChild(card);
                     });
+
+                    renderCasesPagination();
                 }
 
-                // Initial render ( cases 預設顯示第一頁，不反向 )
-                renderCases(currentPage);
+                if (casesData.length > 0) {
+                    renderCases(currentPage);
+                } else {
+                    casesGrid.innerHTML = '<div class="col-span-full py-20 text-center text-gray-500">尚無相關案例。</div>';
+                }
             })
-            .catch(error => console.error('Error fetching cases:', error));
+            .catch(error => {
+                console.error('Error fetching cases:', error);
+                casesGrid.innerHTML = '<div class="col-span-full py-20 text-center text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl mt-8">無法載入實績案例。<br><span class="text-sm mt-2 block opacity-80">若是直接開啟本機 HTML 檔案，瀏覽器安全機制會阻擋讀取 JSON 資料檔，請使用 Local Server 執行或等候上傳發布。</span></div>';
+            });
     }
 
-    // --- Contact Section Logic ---
-    const showFormBtn = document.getElementById('show-form-btn');
-    const contactFormContainer = document.getElementById('contact-form-container');
-
-    if (showFormBtn && contactFormContainer) {
-        showFormBtn.addEventListener('click', () => {
-            contactFormContainer.classList.add('show');
-            const yOffset = -50;
-            const y = contactFormContainer.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-            showFormBtn.style.display = 'none';
-        });
-    }
-
-    // --- Global News Data & Rendering ---
-    let newsContent = [];
-    const newsGrid = document.querySelector('.news-grid');
-    const newsDetailContainer = document.getElementById('news-detail-container');
-
-    // Check if we are on index (newsGrid exists) or detail page (newsDetailContainer exists)
-    if (newsGrid || newsDetailContainer) {
+    // --- Dynamic Rendering Logic for News ---
+    const newsGrid = document.getElementById('news-grid');
+    if (newsGrid) {
         fetch('data/news.json')
             .then(response => response.json())
             .then(data => {
-                newsContent = data.items || [];
+                let newsContent = data.items ? [...data.items].reverse() : [];
 
-                // Initialize Homepage Rendering
-                if (newsGrid) {
-                    const itemsPerPage = 3;
-                    let currentPage = 1;
+                const itemsPerPage = 3;
+                let currentPage = 1;
 
-                    function renderPagination() {
-                        const existingPagination = document.querySelector('.pagination-container');
-                        if (existingPagination) existingPagination.remove();
+                function renderNewsPagination() {
+                    let existingPagination = document.getElementById('news-pagination-wrapper');
+                    if (existingPagination) existingPagination.remove();
 
-                        const totalPages = Math.ceil(newsContent.length / itemsPerPage);
-                        if (totalPages <= 1) return;
+                    const totalPages = Math.ceil(newsContent.length / itemsPerPage);
+                    if (totalPages <= 1) return;
 
-                        const paginationContainer = document.createElement('div');
-                        paginationContainer.className = 'pagination-container';
-                        paginationContainer.style.textAlign = 'center';
-                        paginationContainer.style.marginTop = '30px';
-                        paginationContainer.style.display = 'flex';
-                        paginationContainer.style.justifyContent = 'center';
-                        paginationContainer.style.gap = '10px';
+                    const paginationContainer = document.createElement('div');
+                    paginationContainer.id = 'news-pagination-wrapper';
+                    paginationContainer.className = 'col-span-full flex flex-wrap justify-center mt-12 gap-3 pb-8';
 
-                        for (let i = 1; i <= totalPages; i++) {
-                            const btn = document.createElement('button');
-                            btn.textContent = i;
-                            btn.className = `btn-secondary ${i === currentPage ? 'active' : ''}`;
-                            btn.style.padding = '5px 15px';
-                            btn.style.cursor = 'pointer';
-                            if (i !== currentPage) {
-                                btn.style.opacity = '0.6';
-                            }
-
-                            btn.onclick = () => {
-                                currentPage = i;
-                                renderNews(currentPage);
-                            };
-                            paginationContainer.appendChild(btn);
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.textContent = i;
+                        if (i === currentPage) {
+                            btn.className = 'w-10 h-10 rounded-full bg-yellow-400 text-black font-bold flex items-center justify-center transition shadow-lg scale-105';
+                        } else {
+                            btn.className = 'w-10 h-10 rounded-full border border-white/20 text-gray-400 font-bold flex items-center justify-center hover:bg-white/10 hover:text-white transition';
                         }
-                        newsGrid.parentNode.appendChild(paginationContainer);
+
+                        btn.onclick = () => {
+                            currentPage = i;
+                            renderNews(currentPage);
+                            const target = document.getElementById('news');
+                            const offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - 100;
+                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        };
+                        paginationContainer.appendChild(btn);
                     }
-
-                    function renderNews(page) {
-                        newsGrid.innerHTML = '';
-                        const start = (page - 1) * itemsPerPage;
-                        const end = start + itemsPerPage;
-                        const paginatedItems = newsContent.slice(start, end);
-
-                        paginatedItems.forEach((item, index) => {
-                            const originalIndex = start + index;
-                            const card = document.createElement('div');
-                            card.className = 'news-card';
-                            card.onclick = () => location.href = `news-detail.html?id=${originalIndex}`;
-                            card.style.cursor = 'pointer';
-
-                            const sourceHTML = item.source ? `<span class="image-source">圖片來源：${item.source}</span>` : '';
-                            const isSchematic = item.is_schematic ? 'schematic' : '';
-
-                            card.innerHTML = `
-                                <div class="news-header">
-                                    <span class="news-date">${item.date || ''}</span>
-                                    <span class="news-tag">${item.tag || ''}</span>
-                                </div>
-                                <div class="news-body">
-                                    <h3 class="news-title">${item.title}</h3>
-                                    <p class="news-desc">${item.text}</p>
-                                </div>
-                                <div class="news-image">
-                                    <div class="schematic-wrapper ${isSchematic}">
-                                        <img src="${item.img}" alt="${item.title}">
-                                    </div>
-                                    ${sourceHTML}
-                                </div>
-                            `;
-                            newsGrid.appendChild(card);
-                        });
-                        renderPagination();
-                    }
-
-                    // Initial Render
-                    renderNews(currentPage);
+                    newsGrid.appendChild(paginationContainer);
                 }
 
-                if (newsDetailContainer) {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const newsId = urlParams.get('id');
+                function renderNews(page) {
+                    newsGrid.innerHTML = '';
 
-                    if (newsId !== null && newsContent[newsId]) {
-                        const data = newsContent[newsId];
-                        const sourceHTML = data.source ? `<span class="image-source">圖片來源：${data.source}</span>` : '';
-                        const isSchematic = data.is_schematic ? 'schematic' : '';
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+                    const pageItems = newsContent.slice(start, end);
 
-                        newsDetailContainer.innerHTML = `
-                            <div class="news-detail-header">
-                                <span class="news-detail-date">${data.date || ''}</span>
-                                <h1 class="news-detail-title">${data.title}</h1>
+                    pageItems.forEach((item, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'reveal delay-100 p-6 rounded-2xl bg-[#0f0f0f] border border-white/5 hover:border-yellow-400/30 transition flex flex-col h-full active shadow-lg';
+
+                        const sourceHtml = item.source ? `<div class="text-[10px] text-gray-600 mt-4 border-t border-white/5 pt-3 tracking-widest uppercase">圖片來源：${item.source}</div>` : '';
+                        const schematicHtml = item.is_schematic ? `<div class="absolute top-3 left-3 bg-red-500/90 text-white text-[10px] font-bold tracking-widest px-2 py-1 rounded backdrop-blur z-10 uppercase">示意圖</div>` : '';
+
+                        card.innerHTML = `
+                            <div class="image-zoom-container aspect-video mb-6 rounded-xl overflow-hidden relative border border-white/5 bg-[#111]">
+                                <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover">
+                                ${schematicHtml}
                             </div>
-                            <div class="news-detail-image">
-                                <div class="schematic-wrapper ${isSchematic}">
-                                    <img src="${data.img}" alt="${data.title}">
-                                </div>
-                                ${sourceHTML}
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="px-3 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 text-[10px] font-bold tracking-widest uppercase rounded-full">${item.tag || 'News'}</span>
+                                <span class="text-xs text-gray-500 font-medium">${item.date || ''}</span>
                             </div>
-                            <div class="news-detail-body">
-                                ${data.text.replace(/\n/g, '<br>')}
-                            </div>
+                            <h3 class="text-xl font-bold mb-3 hover:text-yellow-400 transition leading-tight">${item.title}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed flex-grow line-clamp-3">${item.text}</p>
+                            ${sourceHtml}
                         `;
-                    } else {
-                        newsDetailContainer.innerHTML = '<p class="error-msg">找不到該則新聞。</p>';
-                    }
+
+                        newsGrid.appendChild(card);
+                    });
+
+                    renderNewsPagination();
+                }
+
+                if (newsContent.length > 0) {
+                    renderNews(currentPage);
+                } else {
+                    newsGrid.innerHTML = '<div class="col-span-full py-20 text-center text-gray-500">尚無最新消息。</div>';
                 }
             })
-            .catch(error => console.error('Error fetching news:', error));
+            .catch(error => {
+                console.error('Error fetching news:', error);
+                newsGrid.innerHTML = '<div class="col-span-full py-20 text-center text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl mt-8">無法載入最新消息。<br><span class="text-sm mt-2 block opacity-80">若是直接開啟本機 HTML 檔案，瀏覽器安全機制會阻擋讀取 JSON 資料檔，請使用 Local Server 執行或等候上傳發布。</span></div>';
+            });
     }
-});
-
-// --- Sidebar Interaction Disable (Step 309) ---
-document.querySelectorAll('.floating-sidebar .sidebar-item').forEach(item => {
-    item.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent link navigation
-        console.log('Sidebar item clicked but disabled.');
-    });
-});
-
-// --- Scroll Reveal Animation ---
-document.addEventListener("DOMContentLoaded", function () {
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const revealOptions = {
-        threshold: 0.15, // 元素進入視窗 15% 時觸發
-        rootMargin: "0px 0px -50px 0px" // 提早或延遲觸發的邊界
-    };
-
-    const revealOnScroll = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return;
-            } else {
-                entry.target.classList.add('active');
-                // 停止觀察已顯示的元素，讓動畫只播放一次
-                observer.unobserve(entry.target);
-            }
-        });
-    }, revealOptions);
-
-    revealElements.forEach(el => {
-        revealOnScroll.observe(el);
-    });
 });

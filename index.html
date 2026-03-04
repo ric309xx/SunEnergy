@@ -168,7 +168,7 @@
     <section id="hero" class="relative min-h-screen flex items-center px-6 pt-20 overflow-hidden bg-black">
         <!-- 背景影片 -->
         <video autoplay loop muted playsinline
-            class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen">
+            class="absolute inset-0 w-full h-full object-cover z-0 opacity-80 mix-blend-screen">
             <source src="head.mp4" type="video/mp4">
         </video>
         <!-- 漸層遮罩 (左側深色保持文字可讀，右側透名) -->
@@ -206,49 +206,59 @@
 
             <div class="grid md:grid-cols-3 gap-12">
                 <div
-                    class="reveal delay-100 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
+                    class="reveal delay-100 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left flex flex-col justify-center">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
-                    <div
-                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
-                        <iconify-icon icon="solar:sun-bold-duotone"
-                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                    <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
+                        <div
+                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
+                            <iconify-icon icon="solar:sun-bold-duotone"
+                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
+                            太陽能系統建置</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">太陽能系統建置
-                    </h3>
-                    <p class="text-gray-400 leading-relaxed transition relative z-10">
+                    <p class="text-gray-400 leading-relaxed transition relative z-10 mt-2">
                         從屋頂型到地面型太陽能電廠，提供專業測量、高效益規劃、專精安裝到雲端維運的一條龍服務。</p>
                 </div>
 
                 <div
-                    class="reveal delay-200 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
+                    class="reveal delay-200 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left flex flex-col justify-center">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
-                    <div
-                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
-                        <iconify-icon icon="mdi:wind-turbine"
-                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                    <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
+                        <div
+                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
+                            <iconify-icon icon="mdi:wind-turbine"
+                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
+                            小型風力發電</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">小型風力發電</h3>
-                    <p class="text-gray-400 leading-relaxed transition relative z-10">
+                    <p class="text-gray-400 leading-relaxed transition relative z-10 mt-2">
                         結合風光互補系統佈局，突破時空限制，在夜間或日照不足的氣候條件下依然能持續產出潔淨能源。</p>
                 </div>
 
                 <div
-                    class="reveal delay-300 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
+                    class="reveal delay-300 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left flex flex-col justify-center">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
-                    <div
-                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
-                        <iconify-icon icon="solar:battery-charge-bold-duotone"
-                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                    <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
+                        <div
+                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
+                            <iconify-icon icon="solar:battery-charge-bold-duotone"
+                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                        </div>
+                        <h3
+                            class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
+                            智慧儲能解決方案</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">智慧儲能解決方案
-                    </h3>
-                    <p class="text-gray-400 leading-relaxed transition relative z-10">
+                    <p class="text-gray-400 leading-relaxed transition relative z-10 mt-2">
                         導入高效能電池組件與 AI 能源管理系統 (EMS)，精準調節尖離峰用電，確保廠房與家庭供電絕對穩定。</p>
                 </div>
             </div>
@@ -405,6 +415,52 @@
     </div>
 
 
+    <!-- 最新消息 -->
+    <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Latest News</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold">最新消息</h2>
+                </div>
+                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg">
+                    關注產業動態，掌握綠能趨勢與我們的最新活動紀錄。
+                </p>
+            </div>
+
+            <!-- 動態生成容器 -->
+            <div id="news-grid" class="grid md:grid-cols-3 gap-8">
+                <div class="col-span-full py-20 text-center text-gray-500">
+                    <iconify-icon icon="line-md:loading-loop" class="text-4xl text-yellow-400 mb-4"></iconify-icon>
+                    <p>正在載入最新消息...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新消息 -->
+    <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Latest News</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold">最新消息</h2>
+                </div>
+                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg">
+                    關注產業動態，掌握綠能趨勢與我們的最新活動紀錄。
+                </p>
+            </div>
+
+            <!-- 動態生成容器 -->
+            <div id="news-grid" class="grid md:grid-cols-3 gap-8">
+                <div class="col-span-full py-20 text-center text-gray-500">
+                    <iconify-icon icon="line-md:loading-loop" class="text-4xl text-yellow-400 mb-4"></iconify-icon>
+                    <p>正在載入最新消息...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 服務流程 (直接套用 6 步驟) -->
     <section id="process" class="py-32 px-6">
         <div class="glow-sphere top-[20%] right-[-20%] opacity-30"></div>
@@ -506,29 +562,6 @@
                 class="text-center mt-20 reveal delay-300 bg-white/[0.02] inline-block mx-auto px-8 py-4 rounded-full border border-white/5">
                 <p class="text-gray-400 text-sm tracking-wide">💡 全數流程約需 <strong class="text-yellow-500">18~20
                         週</strong> 可完成，實際時間可能因項目規模、天候及台電審查進度而異。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 最新消息 -->
-    <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                <div>
-                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Latest News</h2>
-                    <h2 class="text-3xl md:text-5xl font-bold">最新消息</h2>
-                </div>
-                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg">
-                    關注產業動態，掌握綠能趨勢與我們的最新活動紀錄。
-                </p>
-            </div>
-
-            <!-- 動態生成容器 -->
-            <div id="news-grid" class="grid md:grid-cols-3 gap-8">
-                <div class="col-span-full py-20 text-center text-gray-500">
-                    <iconify-icon icon="line-md:loading-loop" class="text-4xl text-yellow-400 mb-4"></iconify-icon>
-                    <p>正在載入最新消息...</p>
-                </div>
             </div>
         </div>
     </section>
