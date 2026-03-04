@@ -1,303 +1,656 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>冠得科技 - 專業太陽能解決方案</title>
+    <title>冠得科技工程有限公司 - 專業太陽能解決方案</title>
     <meta name="description" content="冠得科技 提供全方位的太陽能、風力發電與儲能系統解決方案，致力於創造更潔淨的綠色未來。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Netlify Identity Widget 供 CMS 登入使用 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <style>
+        :root {
+            --color-bg: #0a0a0a;
+            --color-card: #141414;
+            --color-primary: #FFD700;
+            --color-text: #ffffff;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 滾動進場動畫 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        /* 背景微光裝飾 */
+        .glow-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 導航欄毛玻璃 */
+        nav {
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 按鈕懸停效果 */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 圖片網格裝飾 */
+        .image-zoom-container {
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .image-zoom-container img {
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .image-zoom-container:hover img {
+            transform: scale(1.08);
+        }
+
+        /* 流程步驟裝飾線 */
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.5), transparent);
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .process-step::after {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <img src="images/logo.png" alt="冠得科技 Logo">
-            </a>
-            <button class="menu-toggle" aria-label="開啟選單">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#hero">首頁</a></li>
-                    <li><a href="#services">服務項目</a></li>
-                    <li><a href="#about">關於我們</a></li>
-                    <li><a href="#cases">實績案例</a></li>
-                    <li><a href="#news">最新消息</a></li>
-                    <li><a href="#contact" class="btn-primary">聯絡我們</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- 背景裝飾 -->
+    <div class="glow-sphere top-[-10%] left-[-10%]"></div>
+    <div class="glow-sphere bottom-[40%] right-[-10%]"></div>
 
-    <!-- Floating Sidebar -->
-    <div class="floating-sidebar">
-        <a href="tel:0800888888" class="sidebar-item" title="電話">
-            <i class="fas fa-phone-alt"></i>
-            <span class="tooltip">聯絡電話</span>
-        </a>
-        <a href="https://www.youtube.com/" target="_blank" class="sidebar-item" title="Youtube">
-            <i class="fab fa-youtube"></i>
-            <span class="tooltip">Youtube</span>
-        </a>
-        <a href="mailto:contact@sun-energy.local" class="sidebar-item" title="Email">
-            <i class="fas fa-envelope"></i>
-            <span class="tooltip">Email</span>
-        </a>
-        <a href="#" class="sidebar-item" title="Line ID">
-            <i class="fab fa-line"></i>
-            <span class="tooltip">Line ID</span>
-        </a>
+    <!-- 導航欄 -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center transition-all duration-300"
+        id="main-nav">
+        <div class="flex items-center gap-2">
+            <iconify-icon icon="solar:sun-2-bold-duotone" class="text-3xl text-yellow-400"></iconify-icon>
+            <span class="text-xl font-bold tracking-tighter hidden sm:inline-block">冠得科技工程有限公司</span>
+            <span class="text-xl font-bold tracking-tighter sm:hidden">冠得科技</span>
+        </div>
+        <div class="hidden lg:flex gap-8 text-sm font-medium tracking-wide uppercase items-center">
+            <a href="#hero" class="hover:text-yellow-400 transition">首頁</a>
+            <a href="#services" class="hover:text-yellow-400 transition">服務項目</a>
+            <a href="#about" class="hover:text-yellow-400 transition">關於我們</a>
+            <a href="#cases" class="hover:text-yellow-400 transition">實績案例</a>
+            <a href="#process" class="hover:text-yellow-400 transition">服務流程</a>
+            <a href="#news" class="hover:text-yellow-400 transition">最新消息</a>
+            <a href="#contact"
+                class="px-6 py-2 bg-yellow-400 text-black text-xs font-bold rounded-full btn-primary transition">
+                免費諮詢
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="block lg:hidden text-2xl text-yellow-400" id="mobile-menu-btn">
+            <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-black/95 z-40 hidden flex-col items-center justify-center gap-8 text-xl font-bold tracking-widest backdrop-blur-md transition-opacity">
+        <a href="#hero" class="mobile-link hover:text-yellow-400 transition">首頁</a>
+        <a href="#services" class="mobile-link hover:text-yellow-400 transition">服務項目</a>
+        <a href="#about" class="mobile-link hover:text-yellow-400 transition">關於我們</a>
+        <a href="#cases" class="mobile-link hover:text-yellow-400 transition">實績案例</a>
+        <a href="#process" class="mobile-link hover:text-yellow-400 transition">服務流程</a>
+        <a href="#news" class="mobile-link hover:text-yellow-400 transition">最新消息</a>
+        <a href="#contact"
+            class="mobile-link text-yellow-400 border border-yellow-400 px-8 py-3 rounded-full mt-4">免費諮詢</a>
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <!-- HD Video Background -->
-        <video autoplay loop muted playsinline class="hero-video">
+    <section id="hero" class="relative min-h-screen flex items-center px-6 pt-20 overflow-hidden bg-black">
+        <!-- 背景影片 -->
+        <video autoplay loop muted playsinline
+            class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen">
             <source src="head.mp4" type="video/mp4">
         </video>
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title fade-in-up">做好每一件<br>意義不凡的小事</h1>
-            <p class="hero-subtitle fade-in-up delay-1">Every single detail matters.<br>專注細節，成就非凡綠能未來。</p>
-            <div class="hero-actions fade-in-up delay-2">
-                <a href="#contact" class="btn-primary">免費諮詢</a>
-                <a href="#services" class="btn-secondary">了解更多</a>
-            </div>
-        </div>
-    </section>
+        <!-- 漸層遮罩 -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-0"></div>
 
-    <!-- Services Section -->
-    <section id="services" class="section services">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">我們的服務</h2>
-                <p class="section-desc">專業技術團隊，為您量身打造最佳能源效益</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <img src="images/service-solar.png" alt="太陽能系統">
-                    </div>
-                    <h3>太陽能系統建置</h3>
-                    <p>從屋頂型到地面型太陽能電廠，提供規劃、安裝到維運的一條龍服務。</p>
-                </div>
-                <div class="service-card reveal delay-1">
-                    <div class="service-icon">
-                        <img src="images/service-wind.png" alt="風力發電">
-                    </div>
-                    <h3>小型風力發電</h3>
-                    <p>結合風光互補系統，在日照不足時依然能持續產出潔淨能源。</p>
-                </div>
-                <div class="service-card reveal delay-2">
-                    <div class="service-icon">
-                        <img src="images/service-storage.png" alt="儲能系統">
-                    </div>
-                    <h3>智慧儲能解決方案</h3>
-                    <p>高效能電池模組與能源管理系統，調節尖離峰用電，確保供電穩定。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process Section -->
-    <section id="process" class="section process">
-        <div class="container pb-0">
-            <div class="section-header text-center reveal">
-                <h2 class="section-title">服務流程</h2>
-            </div>
-            <div class="timeline-container reveal delay-1">
-                <div class="timeline-line"></div>
-                <div class="timeline-grid">
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-laptop-house"></i></div>
-                        <div class="step-num">01</div>
-                        <h3 class="step-title">線上評估與諮詢</h3>
-                        <p class="step-desc">進行初步線上評估和基本的諮詢服務，約1~2週時間。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-map-location-dot"></i></div>
-                        <div class="step-num">02</div>
-                        <h3 class="step-title">實際到府場勘</h3>
-                        <p class="step-desc">技術團隊到現場詳細場勘，包括環境分析、測量並評估任何可能影響安裝的因素，約1週內完成。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-compass-drafting"></i></div>
-                        <div class="step-num">03</div>
-                        <h3 class="step-title">設計規劃</h3>
-                        <p class="step-desc">設計師初步規劃太陽能系統配置圖、系統效率分析及預期效益報告。與客戶共同討論，確保方案符合需求和預期，約需1~2週。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-file-signature"></i></div>
-                        <div class="step-num">04</div>
-                        <h3 class="step-title">簽訂合約</h3>
-                        <p class="step-desc">簽訂合約並準備資料送件，約需1週時間。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-file-import"></i></div>
-                        <div class="step-num">05</div>
-                        <h3 class="step-title">送件申請</h3>
-                        <p class="step-desc">向台電申請審查與能源局申請同意備案，這過程約需要3~4週，且視審查時間而定。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-helmet-safety"></i></div>
-                        <div class="step-num">06</div>
-                        <h3 class="step-title">進場施工</h3>
-                        <p class="step-desc">獲得必要批准後，團隊進場施工。施工時間視項目大小而定，一般需要2~4週。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-house-circle-check"></i></div>
-                        <div class="step-num">07</div>
-                        <h3 class="step-title">完工</h3>
-                        <p class="step-desc">與台電合作完成掛錶和併聯試運轉，以確保系統安全有效運作，這階段約需1~2週。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-building-shield"></i></div>
-                        <div class="step-num">08</div>
-                        <h3 class="step-title">能源局設備登記</h3>
-                        <p class="step-desc">我們將協助完成太陽能設備的最終登記工作，約需1~2週，視審查時間而定。</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-icon-wrapper"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                        <div class="step-num">09</div>
-                        <h3 class="step-title">正式售電</h3>
-                        <p class="step-desc">一切準備就緒後，系統將開始運行，客戶可以開始售電！</p>
-                    </div>
-                </div>
-                <div class="timeline-footer mt-5 text-center">
-                    <p class="text-small text-muted" style="max-width: 800px; margin: 0 auto; line-height: 1.8;">全數流程約需
-                        18~20 週可完成，上述時間為理想估計，實際時間可能因項目規模和特定情況而有所不同。<br>整個過程中，我們會保持與客戶密切溝通，確保每一步驟的透明度和客戶滿意度。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container about-container">
-            <div class="about-content reveal">
-                <h2 class="section-title">關於冠得科技</h2>
-                <p class="about-text">我們是一群對綠色能源充滿熱情的專業團隊，致力於透過創新技術推動能源轉型。冠得科技工程有限公司 擁有豐富的案場經驗，協助無數企業與家庭實現電力自給自足，降低碳足跡。
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="reveal">
+                <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm mt-10 md:mt-0">Guande
+                    Technology</h2>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8">
+                    做好每一件<br><span class="text-yellow-400">意義不凡的小事</span>
+                </h1>
+                <p class="text-gray-300 text-lg mb-10 max-w-lg leading-relaxed">
+                    Every single detail matters.<br>專注細節，為您量身打造最佳能源效益，成就非凡綠能未來。
                 </p>
-                <ul class="about-list">
-                    <li><strong>專業認證：</strong> 擁有國家級技術證照與ISO認證。</li>
-                    <li><strong>高效品質：</strong> 嚴選頂級模組，確保發電效益最大化。</li>
-                    <li><strong>永續承諾：</strong> 每一度綠電，都是對下一代的承諾。</li>
-                </ul>
-                <a href="#contact" class="btn-text">深入了解我們 &rarr;</a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact"
+                        class="px-8 py-4 bg-yellow-400 text-black font-bold rounded-lg hover:bg-yellow-300 transition shadow-[0_0_15px_rgba(255,215,0,0.3)] btn-primary">免費諮詢</a>
+                    <a href="#services"
+                        class="px-8 py-4 border border-white/20 font-bold rounded-lg hover:border-white transition backdrop-blur-sm bg-black/30 hover:bg-white/10">了解更多</a>
+                </div>
             </div>
-            <div class="about-image reveal delay-1">
-                <div class="image-wrapper">
-                    <!-- Update: Using the hero image as about fallback/illustration again or another image if preferred, keeping existing for now -->
-                    <img src="images/hero-new.png" alt="關於我們示意圖">
+            <!-- Optional graphic on right side  -->
+            <div class="relative reveal delay-200 hidden lg:block">
+                <div
+                    class="image-zoom-container aspect-[4/5] shadow-2xl border border-white/10 rounded-2xl overflow-hidden relative group">
+                    <img src="images/hero-new.png" alt="Solar Technology"
+                        class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-700"></div>
+                </div>
+                <div
+                    class="absolute -bottom-6 -left-6 bg-yellow-400 p-6 rounded-lg text-black shadow-xl hidden xl:block animate-bounce z-20">
+                    <div class="text-4xl font-bold mb-1">25<span class="text-xl">年</span></div>
+                    <div class="text-xs font-bold uppercase tracking-wider">長效保固承諾</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Case Studies Section (Renamed from Video) -->
-    <section id="cases" class="section cases-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">實績案例</h2>
-                <p class="section-desc">探索我們如何協助企業實現能源轉型</p>
+    <!-- 服務項目 -->
+    <section id="services" class="py-32 px-6 bg-white/[0.02] border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Our Services</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">我們的服務</h2>
+                <div class="w-20 h-1 bg-yellow-400 mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">專業技術團隊，從規劃、建置到維運，為您量身打造最佳能源效益。</p>
             </div>
 
-            <div class="cases-grid reveal" id="cases-grid">
+            <div class="grid md:grid-cols-3 gap-12">
+                <div
+                    class="reveal delay-100 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    <div
+                        class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
+                        <iconify-icon icon="solar:sun-bold-duotone" class="text-4xl text-yellow-400"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">太陽能系統建置
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                        從屋頂型到地面型太陽能電廠，提供專業測量、高效益規劃、專精安裝到雲端維運的一條龍服務。</p>
+                </div>
+
+                <div
+                    class="reveal delay-200 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    <div
+                        class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
+                        <iconify-icon icon="mdi:wind-turbine" class="text-4xl text-yellow-400"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">小型風力發電</h3>
+                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                        結合風光互補系統佈局，突破時空限制，在夜間或日照不足的氣候條件下依然能持續產出潔淨能源。</p>
+                </div>
+
+                <div
+                    class="reveal delay-300 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    <div
+                        class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
+                        <iconify-icon icon="solar:battery-charge-bold-duotone"
+                            class="text-4xl text-yellow-400"></iconify-icon>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">智慧儲能解決方案
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                        導入高效能電池組件與 AI 能源管理系統 (EMS)，精準調節尖離峰用電，確保廠房與家庭供電絕對穩定。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div
+                        class="image-zoom-container aspect-video border border-white/5 rounded-2xl relative overflow-hidden shadow-2xl">
+                        <!-- fallback image logic, if hero-new.png is there, else unsplash -->
+                        <img src="images/case_01.jpg" alt="關於冠得科技" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                </div>
+                <div class="reveal delay-200">
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">About Us</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">引領綠色未來的專業推手</h2>
+                    <p class="text-gray-400 mb-8 text-lg leading-relaxed">
+                        我們是一群對綠色能源充滿熱情的專業團隊，致力於透過創新技術推動能源轉型。<strong class="text-white">冠得科技工程有限公司</strong>
+                        擁有豐富的案場設計與施工經驗，協助無數企業與家庭實現電力自給自足，將閒置屋頂轉化為長久的零碳收益。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[0.03] transition">
+                            <iconify-icon icon="solar:shield-check-bold"
+                                class="text-yellow-400 text-3xl mt-1"></iconify-icon>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">專業認證體系</h4>
+                                <span class="text-gray-400 text-sm">擁有國家級技術證照與營造認證，確保施工安全與品質。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[0.03] transition">
+                            <iconify-icon icon="solar:target-bold" class="text-yellow-400 text-3xl mt-1"></iconify-icon>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">極致發電效能</h4>
+                                <span class="text-gray-400 text-sm">嚴選一線頂級光電模組與變流器，確保系統20年以上高穩定發電。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/[0.03] transition">
+                            <iconify-icon icon="solar:leaf-bold" class="text-yellow-400 text-3xl mt-1"></iconify-icon>
+                            <div>
+                                <h4 class="text-white font-bold mb-1">永續環境承諾</h4>
+                                <span class="text-gray-400 text-sm">你產出的每一度綠電，都是對下一代潔淨地球的承諾。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實績案例 -->
+    <section id="cases" class="py-32 px-6 bg-[#080808] border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Case Studies</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold">卓越實績見證</h2>
+                </div>
+                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg leading-relaxed">
+                    見證我們為各產業與住宅量身打造的高效能綠電方案，用真實數據證明品質與實力。
+                </p>
+            </div>
+
+            <!-- 動態生成容器 -->
+            <div id="cases-grid" class="grid md:grid-cols-3 gap-x-8 gap-y-12">
                 <!-- Cases will be injected by JS from cases.json -->
+                <div class="col-span-full py-20 text-center text-gray-500">
+                    <iconify-icon icon="line-md:loading-loop" class="text-4xl text-yellow-400 mb-4"></iconify-icon>
+                    <p>正在載入精選案例...</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- News Section -->
-    <section id="news" class="section news">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">最新消息</h2>
-                <p class="section-desc">關注冠得科技，掌握綠能趨勢與我們的最新動態</p>
+    <!-- 案例詳情 Modal 彈出視窗 -->
+    <div id="caseModal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <!-- 半透明毛玻璃背景 -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity" id="caseModalOverlay"
+            onclick="closeModal()"></div>
+
+        <!-- Modal 內容容器 -->
+        <div id="modalContent"
+            class="relative bg-[#0f0f0f] border border-white/10 rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 shadow-2xl flex flex-col md:flex-row overflow-hidden">
+
+            <!-- 關閉按鈕 -->
+            <button onclick="closeModal()"
+                class="absolute top-4 right-4 md:top-6 md:right-6 z-20 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 hover:bg-yellow-400 hover:border-yellow-400 hover:text-black transition group text-white">
+                <iconify-icon icon="solar:close-circle-line-duotone" class="text-2xl transition"></iconify-icon>
+            </button>
+
+            <!-- 左側圖片區 -->
+            <div class="w-full md:w-[55%] min-h-[350px] md:min-h-full relative bg-black flex flex-col group">
+                <div class="flex-1 relative w-full h-full min-h-[350px]">
+                    <img id="modalImg" src="" alt="Case Details" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block"></div>
+                </div>
+
+                <!-- 多圖縮圖區 (如果有) -->
+                <div id="modal-gallery-thumbs"
+                    class="flex gap-2 p-4 bg-black/60 backdrop-blur-sm overflow-x-auto w-full absolute bottom-0 z-10 hidden scrollbar-hide">
+                    <!-- dynamically injected by JS -->
+                </div>
             </div>
 
-            <div class="news-grid reveal">
-                <!-- News Cards will be injected by JS -->
-                <div class="news-image">
-                    <div class="schematic-wrapper">
-                        <img src="images/news-real-environment.jpg" alt="與自然共呼吸的永續循環">
+            <!-- 右側文字資料區 -->
+            <div class="w-full md:w-[45%] p-8 md:p-12 flex flex-col relative z-10 bg-[#0f0f0f] justify-center">
+                <div class="flex items-center gap-3 mb-6 flex-wrap">
+                    <span
+                        class="px-3 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 text-xs font-bold rounded-full tracking-wider">完工實績</span>
+                    <span id="modalDate" class="text-sm text-gray-400 font-medium"></span>
+                </div>
+
+                <h3 id="modalTitle" class="text-2xl md:text-4xl font-bold mb-4 leading-tight"></h3>
+                <h4 id="modalSubtitle" class="text-gray-400 mb-8 font-medium text-base hidden line-clamp-2"></h4>
+
+                <div class="grid grid-cols-2 gap-6 pb-6 border-b border-light/5 mb-6 border-white/5">
+                    <div>
+                        <p class="text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                            <iconify-icon icon="solar:bolt-circle-line-duotone" class="text-lg"></iconify-icon>建置容量
+                        </p>
+                        <p id="modalCapacity" class="text-xl md:text-2xl font-bold text-white">-</p>
                     </div>
-                    <span class="image-source">圖片來源：Unsplash</span>
+                    <div id="modalGenerationGroup" class="hidden">
+                        <p class="text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                            <iconify-icon icon="solar:wad-of-money-line-duotone" class="text-lg"></iconify-icon>預估首年發電
+                        </p>
+                        <p id="modalGeneration" class="text-xl md:text-2xl font-bold text-yellow-500">-</p>
+                    </div>
+                </div>
+
+                <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                    <h4 class="text-white font-bold mb-3 text-sm tracking-widest uppercase">專案說明</h4>
+                    <div id="modalDesc" class="text-gray-400 leading-relaxed text-sm space-y-4">
+                        <!-- 說明內容動態載入 -->
+                    </div>
+
+                    <!-- 影片區塊 -->
+                    <div id="modalVideoContainer" class="hidden mt-8">
+                        <h4 class="text-white font-bold mb-3 text-sm tracking-widest uppercase">相關影片</h4>
+                        <div class="w-full rounded-xl overflow-hidden shadow-lg border border-white/5 bg-black">
+                            <iframe id="modalIframe" src="" class="w-full aspect-video" frameborder="0"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <!-- 服務流程 (直接套用 6 步驟) -->
+    <section id="process" class="py-32 px-6">
+        <div class="glow-sphere top-[20%] right-[-20%] opacity-30"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Service Process</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">嚴謹透明的建置旅程</h2>
+                <div class="w-20 h-1 bg-yellow-400 mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">從最初的願景溝通到最終的發電維運，我們確保每一個環節都精準無誤，讓您無後顧之憂。</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-y-12 gap-x-6 relative">
+                <!-- 橫向連接線 (僅限桌機顯靈) -->
+                <div
+                    class="hidden md:block absolute top-[2.5rem] left-[8%] right-[8%] h-[2px] bg-gradient-to-r from-yellow-400/50 via-yellow-400/20 to-transparent -z-10">
+                </div>
+
+                <!-- 步驟 1 -->
+                <div class="reveal delay-100 text-center relative process-step group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="solar:chat-round-line-bold"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            1</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">需求洽詢</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">了解電力需求與<br>建置環境初步評估</p>
+                </div>
+                <!-- 步驟 2 -->
+                <div class="reveal delay-100 text-center relative process-step group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="solar:map-point-wave-bold"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            2</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">現場勘查</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">專業團隊精準測量與<br>結構安全性實地勘驗</p>
+                </div>
+                <!-- 步驟 3 -->
+                <div class="reveal delay-200 text-center relative process-step group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="solar:ruler-pen-bold"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            3</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">規劃設計</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">客製化光電板配置圖<br>與長期預期效益分析</p>
+                </div>
+                <!-- 步驟 4 -->
+                <div class="reveal delay-200 text-center relative process-step group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="mdi:hard-hat"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            4</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">工程建置</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">代辦各項政府公文<br>並由專業團隊安全施工</p>
+                </div>
+                <!-- 步驟 5 -->
+                <div class="reveal delay-300 text-center relative process-step group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="solar:transmission-bold"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            5</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">併網發電</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">與台電合作完成掛錶<br>正式開始產電與售電</p>
+                </div>
+                <!-- 步驟 6 -->
+                <div class="reveal delay-300 text-center relative group">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
+                        <iconify-icon icon="solar:widget-bold"
+                            class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
+                        <div
+                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            6</div>
+                    </div>
+                    <h4 class="font-bold mb-2 text-white text-lg">維運監測</h4>
+                    <p class="text-sm text-gray-500 px-2 leading-relaxed">24H 雲端效能監控<br>與長效售後維修保養</p>
+                </div>
+            </div>
+
+            <div
+                class="text-center mt-20 reveal delay-300 bg-white/[0.02] inline-block mx-auto px-8 py-4 rounded-full border border-white/5">
+                <p class="text-gray-400 text-sm tracking-wide">💡 全數流程約需 <strong class="text-yellow-500">18~20
+                        週</strong> 可完成，實際時間可能因項目規模、天候及台電審查進度而異。</p>
+            </div>
         </div>
     </section>
 
-    <!-- Contact Section Redesign -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="contact-split reveal">
-                <!-- Left Image -->
-                <div class="contact-left">
-                    <div class="circle-mask">
-                        <img src="images/contact-side.png" alt="Solar Roof">
+    <!-- 最新消息 -->
+    <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Latest News</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold">最新消息</h2>
+                </div>
+                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg">
+                    關注產業動態，掌握綠能趨勢與我們的最新活動紀錄。
+                </p>
+            </div>
+
+            <!-- 動態生成容器 -->
+            <div id="news-grid" class="grid md:grid-cols-3 gap-8">
+                <div class="col-span-full py-20 text-center text-gray-500">
+                    <iconify-icon icon="line-md:loading-loop" class="text-4xl text-yellow-400 mb-4"></iconify-icon>
+                    <p>正在載入最新消息...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡我們 -->
+    <section id="contact" class="py-32 px-6 bg-[#030303] relative border-t border-white/5 overflow-hidden">
+        <!-- 裝飾微光 -->
+        <div class="glow-sphere bottom-[-30%] right-[-10%] opacity-20"></div>
+        <div
+            class="absolute top-0 right-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-yellow-400/20 to-transparent">
+        </div>
+        <div
+            class="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-yellow-400/10 to-transparent">
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <!-- Left Content -->
+                <div class="reveal">
+                    <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Contact Us</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-8 leading-tight">準備好開始您的<br><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600">綠能轉型計畫</span>了嗎？
+                    </h2>
+                    <p class="text-gray-400 mb-10 text-lg leading-relaxed max-w-lg">
+                        無論您是想將閒置屋頂出租獲利、規劃自費建置太陽能系統，或是尋求穩健的投資機會，我們為您提供最詳盡的免費評估與建議。
+                    </p>
+                    <div class="space-y-6">
+                        <div
+                            class="flex items-center gap-5 p-4 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-yellow-400/30 transition">
+                            <div
+                                class="w-14 h-14 rounded-full bg-yellow-400/10 flex items-center justify-center text-yellow-400 border border-yellow-400/20">
+                                <iconify-icon icon="solar:phone-bold-duotone" class="text-3xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">免付費諮詢專線</p>
+                                <a href="tel:0800888888"
+                                    class="font-bold text-xl hover:text-yellow-400 transition">0800-888-888</a>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-5 p-4 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-yellow-400/30 transition">
+                            <div
+                                class="w-14 h-14 rounded-full bg-yellow-400/10 flex items-center justify-center text-yellow-400 border border-yellow-400/20">
+                                <iconify-icon icon="solar:letter-bold-duotone" class="text-3xl"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">服務信箱</p>
+                                <a href="mailto:contact@guande.com.tw"
+                                    class="font-bold text-xl hover:text-yellow-400 transition">contact@guande.com.tw</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right Content -->
-                <div class="contact-right">
-                    <h2 class="contact-title-new">免費評估、諮詢表單</h2>
+                <!-- Right Form -->
+                <div class="reveal delay-200">
+                    <div
+                        class="bg-[#0a0a0a] p-8 md:p-10 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                        <!-- Form abstract decoration -->
+                        <div
+                            class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/5 rounded-bl-[100px] pointer-events-none">
+                        </div>
 
-                    <!-- Content Simplified: Options removed -->
-                    <div class="contact-description">
-                        <p id="option-desc">無論您是想將閒置屋頂出租獲利、規劃自費建置太陽能系統，或是尋求穩健的電廠投資機會，冠得科技工程有限公司
-                            專業團隊都能為您提供最詳盡的評估與建議。我們致力於讓綠色能源觸手可及，現在就跨出改變的第一步。</p>
-                    </div>
-
-                    <button id="show-form-btn" class="btn-secondary btn-large">立即填寫，加入太陽能行列! <i
-                            class="fas fa-arrow-right"></i></button>
-
-                    <!-- Hidden Form (Shows on click) -->
-                    <div id="contact-form-container" class="contact-form-container hidden-form form-expanded">
                         <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-                            class="contact-form-new">
+                            class="space-y-6 relative z-10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold text-white mb-2">線上留言預約</h3>
+                                <p class="text-gray-500 text-sm">留下您的資訊，我們的專員將為您優先審視專案</p>
+                            </div>
+
                             <input type="hidden" name="form-name" value="contact" />
                             <p class="hidden" style="display: none;">
                                 <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
                             </p>
 
-                            <div class="form-group-row">
-                                <div class="form-group half">
-                                    <label for="name">您的姓名</label>
-                                    <input type="text" id="name" name="name" placeholder="王大明" required>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="name"
+                                        class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">公司名稱/姓名
+                                        <span class="text-yellow-500">*</span></label>
+                                    <input type="text" id="name" name="name" placeholder="請輸入聯絡人姓名" required
+                                        class="w-full bg-[#141414] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-yellow-400/50 focus:bg-[#1a1a1a] transition placeholder-gray-600">
                                 </div>
-                                <div class="form-group half">
-                                    <label for="phone">聯絡電話</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="0912-345-678" required>
+                                <div>
+                                    <label for="phone"
+                                        class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">聯絡電話
+                                        <span class="text-yellow-500">*</span></label>
+                                    <input type="tel" id="phone" name="phone" placeholder="0912-345-678" required
+                                        class="w-full bg-[#141414] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-yellow-400/50 focus:bg-[#1a1a1a] transition placeholder-gray-600">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">電子郵件 (選填)</label>
-                                <input type="email" id="email" name="email" placeholder="example@gmail.com">
+                            <div>
+                                <label for="email"
+                                    class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">電子郵件
+                                    (選填)</label>
+                                <input type="email" id="email" name="email" placeholder="example@company.com"
+                                    class="w-full bg-[#141414] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-yellow-400/50 focus:bg-[#1a1a1a] transition placeholder-gray-600">
                             </div>
-                            <div class="form-group">
-                                <label for="message">備註或想諮詢的細節</label>
-                                <textarea id="message" name="message" rows="4" placeholder="例如：我想了解自家屋頂是否適合建置太陽能，地址是..."
-                                    required></textarea>
+                            <div>
+                                <label for="message"
+                                    class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">想諮詢的細節或屋頂地址
+                                    <span class="text-yellow-500">*</span></label>
+                                <textarea id="message" name="message" rows="4"
+                                    placeholder="例如：我想了解自家屋頂約50坪是否適合建置太陽能，地址位於台中市..." required
+                                    class="w-full bg-[#141414] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-yellow-400/50 focus:bg-[#1a1a1a] transition placeholder-gray-600 resize-none"></textarea>
                             </div>
-                            <button type="submit" class="btn-primary btn-block"
-                                style="margin-top: 15px;">送出免費諮詢申請</button>
+                            <button type="submit"
+                                class="w-full btn-primary bg-yellow-400 text-black font-bold py-4 rounded-xl mt-6 shadow-[0_4px_14px_0_rgba(255,215,0,0.39)] hover:shadow-[0_6px_20px_rgba(255,215,0,0.23)] flex items-center justify-center gap-2 text-lg">
+                                送出表單申請 <iconify-icon icon="solar:round-arrow-right-bold"></iconify-icon>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -306,103 +659,69 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-logo">冠得科技</div>
-            <div class="footer-links">
-                <a href="#">隱私權政策</a>
-                <a href="#">使用條款</a>
+    <footer class="bg-[#050505] pt-20 pb-12 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16 border-b border-white/5 pb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <iconify-icon icon="solar:sun-2-bold-duotone" class="text-3xl text-yellow-500"></iconify-icon>
+                        <span class="text-xl font-bold tracking-tighter text-white">冠得科技工程有限公司</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm mb-8">
+                        深耕綠能基礎建設，為企業與家庭帶來安全、永續、高報酬的能源資產，推動社會邁向淨零碳排的里程碑。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition"
+                            aria-label="Line">
+                            <iconify-icon icon="fa-brands:line" class="text-lg"></iconify-icon>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition"
+                            aria-label="Facebook">
+                            <iconify-icon icon="fa-brands:facebook-f"></iconify-icon>
+                        </a>
+                        <a href="https://www.youtube.com/" target="_blank"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-yellow-400 hover:text-black hover:border-yellow-400 transition"
+                            aria-label="YouTube">
+                            <iconify-icon icon="fa-brands:youtube"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 uppercase text-xs tracking-widest text-gray-300">產品與服務</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#services" class="hover:text-yellow-400 transition">太陽能系統建置</a></li>
+                        <li><a href="#services" class="hover:text-yellow-400 transition">小型風力發電</a></li>
+                        <li><a href="#services" class="hover:text-yellow-400 transition">智慧儲能解決方案</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-6 uppercase text-xs tracking-widest text-gray-300">快速連結</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#about" class="hover:text-yellow-400 transition">關於我們</a></li>
+                        <li><a href="#cases" class="hover:text-yellow-400 transition">專案實績</a></li>
+                        <li><a href="#process" class="hover:text-yellow-400 transition">建置流程</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-copy">
-                &copy; 2026 冠得科技. All Rights Reserved.
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-600 tracking-wider">
+                <p>&copy; 2026 GUANDE TECHNOLOGY. ALL RIGHTS RESERVED.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-yellow-400 transition">隱私權政策</a>
+                    <a href="#" class="hover:text-yellow-400 transition">服務條款</a>
+                    <!-- CMS 後台連結隱藏在不起眼的底部 -->
+                    <a href="/admin/" class="hover:text-white transition opacity-30 hover:opacity-100">管理登入</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Classic Split Modal (Left Image, Right Data) -->
-    <div id="case-modal" class="modal split-modal">
-        <div class="modal-content split-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-body split-body">
-
-                <!-- 左右排版主區塊 -->
-                <div class="split-layout">
-                    <!-- 左欄：大張相片與多圖相簿 -->
-                    <div class="split-left" id="modal-media-container">
-                        <!-- 縮圖列 (當有多張相片時顯示) -->
-                        <div class="modal-gallery-thumbs" id="modal-gallery-thumbs" style="display: none;"></div>
-
-                        <!-- 主視圖 -->
-                        <div class="modal-main-image-wrapper">
-                            <img id="modal-image" src="" alt="案場照片" style="display: none;">
-                        </div>
-                    </div>
-
-                    <!-- 右欄：標題、數據、描述 -->
-                    <div class="split-right">
-                        <div class="split-header">
-                            <span class="split-badge">完工實績</span>
-                            <h2 id="modal-title" class="split-title">標題</h2>
-                            <p id="modal-subtitle" class="split-subtitle"></p>
-                        </div>
-
-                        <!-- 數據簡潔表 -->
-                        <div class="split-data-list">
-                            <div class="data-row">
-                                <i class="fa-regular fa-calendar-check row-icon"></i>
-                                <div class="row-info">
-                                    <span class="row-label">完工日期</span>
-                                    <strong id="modal-date" class="row-value">-</strong>
-                                </div>
-                            </div>
-                            <div class="data-row">
-                                <i class="fa-solid fa-bolt row-icon"></i>
-                                <div class="row-info">
-                                    <span class="row-label">建置容量</span>
-                                    <strong id="modal-capacity" class="row-value">-</strong>
-                                </div>
-                            </div>
-                            <div class="data-row" id="modal-co2-card" style="display: none;">
-                                <i class="fa-solid fa-leaf row-icon text-green"></i>
-                                <div class="row-info">
-                                    <span class="row-label">預計年減碳</span>
-                                    <strong id="modal-co2" class="row-value">-</strong>
-                                </div>
-                            </div>
-
-                            <!-- 年發電量：獨立突出版 -->
-                            <div class="generation-card" id="modal-generation-card" style="display: none;">
-                                <i class="fa-solid fa-bolt-lightning gen-icon"></i>
-                                <div class="gen-info">
-                                    <span class="gen-label">預估年發電量</span>
-                                    <strong id="modal-generation" class="gen-value">-</strong>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 描述區 -->
-                        <div class="split-desc">
-                            <h3 class="desc-heading">案件說明</h3>
-                            <p id="modal-desc" class="desc-text">內容描述...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 底部：相關影片 (非滿版、置中) -->
-                <div class="video-section-wrapper" id="modal-video-container" style="display: none;">
-                    <h4 class="video-section-title">相關影片</h4>
-                    <div class="centered-video">
-                        <iframe id="modal-iframe" src="" frameborder="0"
-                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- 腳本引入與 Netlify CMS 登入跳轉 -->
+    <!-- 腳本引入 -->
     <script>
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
@@ -413,8 +732,92 @@
                 }
             });
         }
+
+        // Mobile Menu Management
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const icon = mobileMenuBtn.querySelector('iconify-icon');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    // wait a tick for display to apply, then transition opacity
+                    setTimeout(() => { mobileMenu.classList.remove('opacity-0'); }, 10);
+                    icon.setAttribute('icon', 'solar:close-circle-linear');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    }, 300); // match transition duration
+                    icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                    }, 300);
+                    const icon = mobileMenuBtn.querySelector('iconify-icon');
+                    icon.setAttribute('icon', 'solar:hamburger-menu-linear');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Navigation Bar Blur Control & Scroll Smoothly handled in script.js
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-3', 'shadow-2xl', 'bg-black/90');
+                nav.classList.remove('py-4', 'bg-black/80');
+            } else {
+                nav.classList.add('py-4', 'bg-black/80');
+                nav.classList.remove('py-3', 'shadow-2xl', 'bg-black/90');
+            }
+        });
     </script>
     <script src="js/script.js"></script>
+
+    <style>
+        /* Custom scrollbar for modal */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.6);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
 </body>
 
 </html>
