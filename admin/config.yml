@@ -4,9 +4,6 @@ backend:
 
 media_folder: "images"
 public_folder: "images"
-# 加上以下設定讓 Decap 知道這是整個網站的靜態目錄
-media_library:
-  max_file_size: 10485760 # 限制單檔 10MB 避免 API_ERROR
 
 # 暫不啟用瀏覽器端自動壓縮以避免 API_ERROR
 
