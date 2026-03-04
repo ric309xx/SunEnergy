@@ -168,7 +168,7 @@
     <section id="hero" class="relative min-h-screen flex items-center px-6 pt-20 overflow-hidden bg-black">
         <!-- 背景影片 -->
         <video autoplay loop muted playsinline
-            class="absolute inset-0 w-full h-full object-cover z-0 opacity-60 mix-blend-screen">
+            class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-screen">
             <source src="head.mp4" type="video/mp4">
         </video>
         <!-- 漸層遮罩 (左側深色保持文字可讀，右側透名) -->
@@ -206,47 +206,49 @@
 
             <div class="grid md:grid-cols-3 gap-12">
                 <div
-                    class="reveal delay-100 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    class="reveal delay-100 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
                     <div
-                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
-                        <iconify-icon icon="solar:sun-bold-duotone" class="text-4xl text-yellow-400"></iconify-icon>
+                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
+                        <iconify-icon icon="solar:sun-bold-duotone"
+                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">太陽能系統建置
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">太陽能系統建置
                     </h3>
-                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                    <p class="text-gray-400 leading-relaxed transition relative z-10">
                         從屋頂型到地面型太陽能電廠，提供專業測量、高效益規劃、專精安裝到雲端維運的一條龍服務。</p>
                 </div>
 
                 <div
-                    class="reveal delay-200 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    class="reveal delay-200 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
                     <div
-                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
-                        <iconify-icon icon="mdi:wind-turbine" class="text-4xl text-yellow-400"></iconify-icon>
+                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
+                        <iconify-icon icon="mdi:wind-turbine"
+                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">小型風力發電</h3>
-                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">小型風力發電</h3>
+                    <p class="text-gray-400 leading-relaxed transition relative z-10">
                         結合風光互補系統佈局，突破時空限制，在夜間或日照不足的氣候條件下依然能持續產出潔淨能源。</p>
                 </div>
 
                 <div
-                    class="reveal delay-300 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden flex flex-col items-center text-center">
+                    class="reveal delay-300 p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-yellow-400/30 transition group shadow-lg backdrop-blur-sm relative overflow-hidden text-left">
                     <div
                         class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition duration-500">
                     </div>
                     <div
-                        class="w-20 h-20 bg-black/50 rounded-full flex items-center justify-center mb-8 border border-white/20 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:scale-110 transition duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative z-10">
+                        class="w-16 h-16 bg-black/50 rounded-xl flex items-center justify-center mb-8 border border-white/20 group-hover:bg-yellow-400 transition duration-500 relative z-10">
                         <iconify-icon icon="solar:battery-charge-bold-duotone"
-                            class="text-4xl text-yellow-400"></iconify-icon>
+                            class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">智慧儲能解決方案
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-yellow-400 transition relative z-10">智慧儲能解決方案
                     </h3>
-                    <p class="text-gray-400 leading-relaxed group-hover:text-white transition relative z-10 flex-grow">
+                    <p class="text-gray-400 leading-relaxed transition relative z-10">
                         導入高效能電池組件與 AI 能源管理系統 (EMS)，精準調節尖離峰用電，確保廠房與家庭供電絕對穩定。</p>
                 </div>
             </div>
