@@ -355,7 +355,7 @@
             </button>
 
             <!-- 左側圖片區 -->
-            <div class="w-full md:w-[55%] min-h-[350px] md:min-h-full relative bg-black flex flex-col group">
+            <div class="w-full md:w-[45%] min-h-[350px] md:min-h-full relative bg-black flex flex-col group">
                 <div class="flex-1 relative w-full h-full min-h-[350px]">
                     <img id="modalImg" src="" alt="Case Details" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden"></div>
@@ -370,7 +370,7 @@
             </div>
 
             <!-- 右側文字資料區 -->
-            <div class="w-full md:w-[45%] p-8 md:p-12 flex flex-col relative z-10 bg-[#0f0f0f] justify-center">
+            <div class="w-full md:w-[55%] p-8 md:p-12 flex flex-col relative z-10 bg-[#0f0f0f] justify-center">
                 <div class="flex items-center gap-3 mb-6 flex-wrap">
                     <span
                         class="px-3 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 text-xs font-bold rounded-full tracking-wider">完工實績</span>
@@ -414,6 +414,41 @@
         </div>
     </div>
 
+    <!-- 最新消息詳情 Modal 彈出視窗 -->
+    <div id="newsModal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity" id="newsModalOverlay"
+            onclick="closeNewsModal()"></div>
+
+        <div id="newsModalContent"
+            class="relative bg-[#0f0f0f] border border-white/10 rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 shadow-2xl flex flex-col md:flex-row overflow-hidden">
+            <button onclick="closeNewsModal()"
+                class="absolute top-4 right-4 md:top-6 md:right-6 z-20 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 hover:bg-yellow-400 hover:border-yellow-400 hover:text-black transition group text-white">
+                <iconify-icon icon="solar:close-circle-line-duotone" class="text-2xl transition"></iconify-icon>
+            </button>
+            <div class="w-full md:w-[45%] min-h-[300px] md:min-h-full relative bg-black flex flex-col group">
+                <div class="flex-1 relative w-full h-full min-h-[300px]">
+                    <img id="newsModalImg" src="" alt="News Details"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block"></div>
+                </div>
+            </div>
+            <div class="w-full md:w-[55%] p-8 md:p-12 flex flex-col relative z-10 bg-[#0f0f0f] justify-center">
+                <div class="flex items-center gap-3 mb-6 flex-wrap">
+                    <span id="newsModalCategory"
+                        class="px-3 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 text-xs font-bold rounded-full tracking-wider">最新消息</span>
+                    <span id="newsModalDate" class="text-sm text-gray-400 font-medium"></span>
+                </div>
+                <h3 id="newsModalTitle" class="text-2xl md:text-3xl font-bold mb-6 leading-tight"></h3>
+                <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                    <div id="newsModalDesc" class="text-gray-400 leading-relaxed text-sm space-y-4">
+                        <!-- 說明內容動態載入 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 最新消息 -->
     <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">

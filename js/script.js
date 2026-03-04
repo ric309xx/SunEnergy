@@ -45,12 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Globals for Modal ---
     const caseModal = document.getElementById('caseModal');
     const modalContent = document.getElementById('modalContent');
+    const newsModal = document.getElementById('newsModal');
+    const newsModalContent = document.getElementById('newsModalContent');
 
     window.closeModal = function () {
         if (!caseModal) return;
         caseModal.classList.add('opacity-0');
-        modalContent.classList.remove('scale-100');
-        modalContent.classList.add('scale-95');
+        if (modalContent) {
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
 
         document.body.style.overflow = '';
 
@@ -64,10 +68,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 300);
     };
 
-    if (caseModal) {
+    window.closeNewsModal = function () {
+        if (!newsModal) return;
+        newsModal.classList.add('opacity-0');
+        if (newsModalContent) {
+            newsModalContent.classList.remove('scale-100');
+            newsModalContent.classList.add('scale-95');
+        }
+
+        document.body.style.overflow = '';
+
+        setTimeout(() => {
+            newsModal.classList.add('hidden');
+            newsModal.classList.remove('flex');
+        }, 300);
+    };
+
+    if (caseModal || newsModal) {
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !caseModal.classList.contains('hidden')) {
-                closeModal();
+            if (e.key === 'Escape') {
+                if (caseModal && !caseModal.classList.contains('hidden')) closeModal();
+                if (newsModal && !newsModal.classList.contains('hidden')) closeNewsModal();
             }
         });
     }
@@ -79,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('data/cases.json')
             .then(response => response.json())
             .then(data => {
-                let casesData = data.items ? [...data.items].reverse() : []; // 反轉最新
+                let casesData = data.items ? [...data.items] : []; // 直接使用原始順序
 
                 const itemsPerPage = 3;
                 let currentPage = 1;
@@ -271,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('data/news.json')
             .then(response => response.json())
             .then(data => {
-                let newsContent = data.items ? [...data.items].reverse() : [];
+                let newsContent = data.items ? [...data.items] : []; // 直接使用原始順序
 
                 const itemsPerPage = 3;
                 let currentPage = 1;
@@ -317,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     pageItems.forEach((item, index) => {
                         const card = document.createElement('div');
-                        card.className = 'reveal delay-100 p-6 rounded-2xl bg-[#0f0f0f] border border-white/5 hover:border-yellow-400/30 transition flex flex-col h-full active shadow-lg';
+                        card.className = 'reveal delay-100 p-6 rounded-2xl bg-[#0f0f0f] border border-white/5 hover:border-yellow-400/30 transition flex flex-col h-full active shadow-lg cursor-pointer group';
 
                         const sourceHtml = item.source ? `<div class="text-[10px] text-gray-600 mt-4 border-t border-white/5 pt-3 tracking-widest uppercase">圖片來源：${item.source}</div>` : '';
                         const schematicHtml = item.is_schematic ? `<div class="absolute top-3 left-3 bg-red-500/90 text-white text-[10px] font-bold tracking-widest px-2 py-1 rounded backdrop-blur z-10 uppercase">示意圖</div>` : '';
@@ -331,10 +352,31 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <span class="px-3 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 text-[10px] font-bold tracking-widest uppercase rounded-full">${item.tag || 'News'}</span>
                                 <span class="text-xs text-gray-500 font-medium">${item.date || ''}</span>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 hover:text-yellow-400 transition leading-tight">${item.title}</h3>
+                            <h3 class="text-xl font-bold mb-3 group-hover:text-yellow-400 transition leading-tight">${item.title}</h3>
                             <p class="text-gray-400 text-sm leading-relaxed flex-grow line-clamp-3">${item.text}</p>
                             ${sourceHtml}
                         `;
+
+                        card.addEventListener('click', () => {
+                            if (!newsModal) return;
+                            document.getElementById('newsModalImg').src = item.img || '';
+                            document.getElementById('newsModalCategory').textContent = item.tag || 'News';
+                            document.getElementById('newsModalDate').textContent = item.date || '';
+                            document.getElementById('newsModalTitle').textContent = item.title || '';
+                            const descText = item.text || '';
+                            document.getElementById('newsModalDesc').innerHTML = descText.replace(/\n/g, '<br>');
+
+                            newsModal.classList.remove('hidden');
+                            newsModal.classList.add('flex');
+                            document.body.style.overflow = 'hidden';
+
+                            void newsModal.offsetWidth;
+                            newsModal.classList.remove('opacity-0');
+                            if (newsModalContent) {
+                                newsModalContent.classList.remove('scale-95');
+                                newsModalContent.classList.add('scale-100');
+                            }
+                        });
 
                         newsGrid.appendChild(card);
                     });
