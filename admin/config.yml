@@ -16,8 +16,6 @@ collections:
       - name: "cases"
         label: "實績案例 (編輯區)"
         file: "data/cases.json"
-        media_folder: "/images/case"
-        public_folder: "images/case"
         description: "請在下方列表點擊展開案場進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
         fields:
           - name: "items"
@@ -37,8 +35,6 @@ collections:
       - name: "news"
         label: "最新消息 (編輯區)"
         file: "data/news.json"
-        media_folder: "/images/news"
-        public_folder: "images/news"
         description: "請在下方列表點擊展開文章進行編輯，完成後按下右上角的 Publish 即可儲存並自動發布上線。"
         fields:
           - name: "items"
