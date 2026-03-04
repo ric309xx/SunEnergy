@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Netlify Identity Widget 供 CMS 登入使用 -->
@@ -106,6 +109,79 @@
                     </div>
                     <h3>智慧儲能解決方案</h3>
                     <p>高效能電池模組與能源管理系統，調節尖離峰用電，確保供電穩定。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="section process">
+        <div class="container pb-0">
+            <div class="section-header text-center reveal">
+                <span class="process-subtitle">Service Process</span>
+                <h2 class="section-title">服務流程</h2>
+            </div>
+            <div class="timeline-container reveal delay-1">
+                <div class="timeline-line"></div>
+                <div class="timeline-grid">
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-laptop-house"></i></div>
+                        <div class="step-num">01</div>
+                        <h3 class="step-title">線上評估與諮詢</h3>
+                        <p class="step-desc">進行初步線上評估和基本的諮詢服務，約1~2週時間。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <div class="step-num">02</div>
+                        <h3 class="step-title">實際到府場勘</h3>
+                        <p class="step-desc">技術團隊到現場詳細場勘，包括環境分析、測量並評估任何可能影響安裝的因素，約1週內完成。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-compass-drafting"></i></div>
+                        <div class="step-num">03</div>
+                        <h3 class="step-title">設計規劃</h3>
+                        <p class="step-desc">設計師初步規劃太陽能系統配置圖、系統效率分析及預期效益報告。與客戶共同討論，確保方案符合需求和預期，約需1~2週。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-file-signature"></i></div>
+                        <div class="step-num">04</div>
+                        <h3 class="step-title">簽訂合約</h3>
+                        <p class="step-desc">簽訂合約並準備資料送件，約需1週時間。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-file-import"></i></div>
+                        <div class="step-num">05</div>
+                        <h3 class="step-title">送件申請</h3>
+                        <p class="step-desc">向台電申請審查與能源局申請同意備案，這過程約需要3~4週，且視審查時間而定。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-helmet-safety"></i></div>
+                        <div class="step-num">06</div>
+                        <h3 class="step-title">進場施工</h3>
+                        <p class="step-desc">獲得必要批准後，團隊進場施工。施工時間視項目大小而定，一般需要2~4週。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-house-circle-check"></i></div>
+                        <div class="step-num">07</div>
+                        <h3 class="step-title">完工</h3>
+                        <p class="step-desc">與台電合作完成掛錶和併聯試運轉，以確保系統安全有效運作，這階段約需1~2週。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-building-shield"></i></div>
+                        <div class="step-num">08</div>
+                        <h3 class="step-title">能源局設備登記</h3>
+                        <p class="step-desc">我們將協助完成太陽能設備的最終登記工作，約需1~2週，視審查時間而定。</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-icon-wrapper"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="step-num">09</div>
+                        <h3 class="step-title">正式售電</h3>
+                        <p class="step-desc">一切準備就緒後，系統將開始運行，客戶可以開始售電！</p>
+                    </div>
+                </div>
+                <div class="timeline-footer mt-5 text-center">
+                    <p class="text-small text-muted" style="max-width: 800px; margin: 0 auto; line-height: 1.8;">全數流程約需
+                        18~20 週可完成，上述時間為理想估計，實際時間可能因項目規模和特定情況而有所不同。<br>整個過程中，我們會保持與客戶密切溝通，確保每一步驟的透明度和客戶滿意度。</p>
                 </div>
             </div>
         </div>
@@ -244,59 +320,80 @@
         </div>
     </footer>
 
-    <!-- Premium Case Study Modal -->
-    <div id="case-modal" class="modal premium-modal">
-        <div class="modal-content premium-content">
+    <!-- Magazine Style Case Study Modal -->
+    <div id="case-modal" class="modal mag-modal">
+        <div class="modal-content mag-content">
             <span class="close-btn">&times;</span>
-            <div class="modal-body premium-body">
+            <div class="modal-body mag-body">
 
                 <!-- 標題區 -->
-                <div class="premium-header">
-                    <span class="modal-badge">完工實績</span>
-                    <h2 id="modal-title" class="premium-title">標題</h2>
-                    <p id="modal-subtitle" class="premium-subtitle"></p>
+                <div class="mag-header">
+                    <span class="mag-badge">完工實績</span>
+                    <h2 id="modal-title" class="mag-title">標題</h2>
+                    <p id="modal-subtitle" class="mag-subtitle"></p>
                 </div>
 
-                <!-- 核心展示區 (左圖右文) -->
-                <div class="premium-showcase" id="modal-showcase-container">
-                    <div class="showcase-image" id="modal-media-container">
-                        <img id="modal-image" src="" alt="案場照片" style="display: none;">
-                    </div>
-                    <div class="showcase-text">
-                        <div class="showcase-text-inner">
-                            <h3 class="showcase-heading">Project Insights</h3>
-                            <p id="modal-desc" class="desc-text">內容描述...</p>
-                        </div>
-                    </div>
+                <!-- 滿版美圖 -->
+                <div class="mag-featured-image" id="modal-media-container">
+                    <img id="modal-image" src="" alt="案場照片" style="display: none;">
                 </div>
 
-                <!-- 數據卡片區 -->
-                <div class="premium-data-cards">
-                    <div class="data-card">
-                        <div class="data-icon"><i class="fa-regular fa-calendar-check"></i></div>
-                        <div class="data-info">
-                            <span class="data-label">完工日期</span>
-                            <strong id="modal-date" class="data-value">-</strong>
+                <div class="mag-content-split">
+                    <!-- 左/上方列：數據飾條與技術圖標 -->
+                    <div class="mag-sidebar">
+                        <div class="mag-data-box">
+                            <div class="data-item">
+                                <i class="fa-regular fa-calendar-check data-icon"></i>
+                                <div class="data-text-group">
+                                    <span class="data-label">完工日期</span>
+                                    <strong id="modal-date" class="data-value">-</strong>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <i class="fa-solid fa-bolt data-icon"></i>
+                                <div class="data-text-group">
+                                    <span class="data-label">建置容量</span>
+                                    <strong id="modal-capacity" class="data-value">-</strong>
+                                </div>
+                            </div>
+                            <div class="data-item" id="modal-co2-card" style="display: none;">
+                                <i class="fa-solid fa-leaf data-icon"></i>
+                                <div class="data-text-group">
+                                    <span class="data-label">預計年減碳量</span>
+                                    <strong id="modal-co2" class="data-value">-</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 靜態技術亮點 (依據案場內容彈性擴充，為排版豐富度設計) -->
+                        <div class="mag-tech-list">
+                            <h4 class="tech-list-title">技術亮點</h4>
+                            <div class="tech-item">
+                                <div class="tech-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                                <div class="tech-info">
+                                    <h5>抗鹽害模組與金屬支架</h5>
+                                    <p>對抗極端氣候，確保設備在嚴苛環境下長期穩定運轉。</p>
+                                </div>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon"><i class="fa-solid fa-network-wired"></i></div>
+                                <div class="tech-info">
+                                    <h5>智慧雲端監控系統</h5>
+                                    <p>即時掌握發電量與設備健康狀態，減少停機損失。</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="data-card">
-                        <div class="data-icon"><i class="fa-solid fa-bolt"></i></div>
-                        <div class="data-info">
-                            <span class="data-label">建置容量</span>
-                            <strong id="modal-capacity" class="data-value">-</strong>
-                        </div>
-                    </div>
-                    <div class="data-card" id="modal-co2-card" style="display: none;">
-                        <div class="data-icon"><i class="fa-solid fa-leaf"></i></div>
-                        <div class="data-info">
-                            <span class="data-label">預計年減碳量</span>
-                            <strong id="modal-co2" class="data-value">-</strong>
-                        </div>
+
+                    <!-- 右側/下方列：內容解說 -->
+                    <div class="mag-main-text">
+                        <h3 class="mag-playfair-title">Project Insights</h3>
+                        <p id="modal-desc" class="desc-text">內容描述...</p>
                     </div>
                 </div>
 
                 <!-- 影片區 -->
-                <div class="video-container premium-video" id="modal-video-container" style="display: none;">
+                <div class="video-container mag-video" id="modal-video-container" style="display: none;">
                     <iframe id="modal-iframe" src="" frameborder="0"
                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>

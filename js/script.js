@@ -200,18 +200,18 @@ document.addEventListener('DOMContentLoaded', function () {
                             document.getElementById('modal-desc').innerHTML = descText.replace(/\n/g, '<br>');
 
                             const modalImg = document.getElementById('modal-image');
-                            const showcaseContainer = document.getElementById('modal-showcase-container');
+                            const modalMediaContainer = document.getElementById('modal-media-container');
                             const modalVideoContainer = document.getElementById('modal-video-container');
 
                             // 處理圖片顯示邏輯
                             if (item.image) {
                                 modalImg.src = item.image;
                                 modalImg.style.display = 'block';
-                                showcaseContainer.style.display = 'flex'; // 恢復 flex 佈局
+                                modalMediaContainer.style.display = 'block';
                             } else {
                                 modalImg.src = '';
                                 modalImg.style.display = 'none';
-                                showcaseContainer.style.display = 'block'; // 無圖時改為一般 block 排版
+                                modalMediaContainer.style.display = 'none';
                             }
 
                             // 處理影片顯示邏輯
