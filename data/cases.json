@@ -2,12 +2,13 @@
   "items": [
     {
       "is_schematic": false,
-      "title": "案場標題",
-      "date": "完工日期 / 狀態",
+      "title": "觀音工業區太陽能板專案",
+      "date": "2025年8月完工",
       "capacity": "建置容量",
-      "image": "images/case_01.jpg",
+      "image": "images/20250814-11.jpg",
       "brief": "首頁簡短描述 (卡片顯示)",
-      "desc": "彈窗詳細描述 (點擊後顯示)"
+      "desc": "彈窗詳細描述 (點擊後顯示)",
+      "video": "d-hTSKExtqQ"
     },
     {
       "title": "科技大廠屋頂型太陽能光電系統",
