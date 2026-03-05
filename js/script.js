@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         card.innerHTML = `
                             <div class="image-zoom-container aspect-[4/3] mb-5 relative rounded-xl overflow-hidden border border-white/5 bg-[#111]">
                                 <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#111] via-transparent to-transparent opacity-80 pointer-events-none"></div>
                                 ${schematicHtml}
                                 <!-- Hover Overlay -->
                                 <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10 backdrop-blur-[2px]">
@@ -346,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         card.innerHTML = `
                             <div class="image-zoom-container aspect-video mb-6 rounded-xl overflow-hidden relative border border-white/5 bg-[#111]">
                                 <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-tl from-[#111] via-transparent to-transparent opacity-80 pointer-events-none"></div>
                                 ${schematicHtml}
                             </div>
                             <div class="flex items-center gap-3 mb-4">
