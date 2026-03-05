@@ -176,12 +176,13 @@
 
         <div class="max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center items-start">
             <div class="reveal max-w-2xl">
-                <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm mt-10 md:mt-0">Guande
+                <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm mt-10 md:mt-0">
+                    Guande
                     Technology</h2>
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8">
+                <h1 class="text-[2.5rem] md:text-6xl lg:text-7xl font-bold leading-tight mb-6 md:mb-8">
                     做好每一件<br><span class="text-yellow-400">意義不凡的小事</span>
                 </h1>
-                <p class="text-gray-300 text-lg mb-10 max-w-lg leading-relaxed">
+                <p class="text-gray-300 text-base md:text-lg mb-8 md:mb-10 max-w-lg leading-relaxed">
                     Every single detail matters.<br>專注細節，為您量身打造最佳能源效益，成就非凡綠能未來。
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -212,9 +213,9 @@
                     </div>
                     <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
                         <div
-                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
-                            <iconify-icon icon="solar:sun-bold-duotone"
-                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                            class="w-16 h-16 flex-shrink-0 bg-white rounded-full flex items-center justify-center border border-white/20 group-hover:drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] transition duration-500 overflow-hidden p-2">
+                            <img src="images/service-solar.png" alt="太陽能系統建置"
+                                class="w-full h-full object-contain transform group-hover:scale-110 transition duration-500">
                         </div>
                         <h3
                             class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
@@ -231,9 +232,9 @@
                     </div>
                     <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
                         <div
-                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
-                            <iconify-icon icon="mdi:wind-turbine"
-                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                            class="w-16 h-16 flex-shrink-0 bg-white rounded-full flex items-center justify-center border border-white/20 group-hover:drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] transition duration-500 overflow-hidden p-2">
+                            <img src="images/service-wind.png" alt="小型風力發電"
+                                class="w-full h-full object-contain transform group-hover:scale-110 transition duration-500">
                         </div>
                         <h3
                             class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
@@ -250,9 +251,9 @@
                     </div>
                     <div class="flex items-center gap-5 mb-4 relative z-10 w-full">
                         <div
-                            class="w-16 h-16 flex-shrink-0 bg-black/50 rounded-xl flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 transition duration-500">
-                            <iconify-icon icon="solar:battery-charge-bold-duotone"
-                                class="text-3xl text-yellow-400 group-hover:text-black transition duration-500"></iconify-icon>
+                            class="w-16 h-16 flex-shrink-0 bg-white rounded-full flex items-center justify-center border border-white/20 group-hover:drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] transition duration-500 overflow-hidden p-2">
+                            <img src="images/service-storage.png" alt="智慧儲能解決方案"
+                                class="w-full h-full object-contain transform group-hover:scale-110 transition duration-500">
                         </div>
                         <h3
                             class="text-xl md:text-2xl font-bold group-hover:text-yellow-400 transition mb-0 leading-tight">
@@ -274,7 +275,12 @@
                         class="image-zoom-container aspect-video border border-white/5 rounded-2xl relative overflow-hidden shadow-2xl">
                         <!-- fallback image logic, if hero-new.png is there, else unsplash -->
                         <img src="images/case_01.jpg" alt="關於冠得科技" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div
+                            class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none">
+                        </div>
                     </div>
                 </div>
                 <div class="reveal delay-200">
@@ -316,12 +322,14 @@
     <!-- 實績案例 -->
     <section id="cases" class="py-32 px-6 bg-[#080808] border-y border-white/5">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-end gap-x-6 mb-16 reveal">
+            <div
+                class="flex flex-col md:flex-row items-center md:items-end text-center md:text-left gap-x-6 mb-12 md:mb-16 reveal">
                 <div>
                     <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Case Studies</h2>
                     <h2 class="text-3xl md:text-5xl font-bold whitespace-nowrap">卓越實績見證</h2>
                 </div>
-                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg leading-relaxed pb-1">
+                <p
+                    class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-base md:text-lg leading-relaxed pb-1 mx-auto md:mx-0">
                     見證我們為各產業與住宅量身打造的高效能綠電方案，用真實數據證明品質與實力。
                 </p>
             </div>
@@ -358,8 +366,13 @@
             <div class="w-full md:w-[50%] min-h-[350px] md:min-h-full relative bg-black flex flex-col group">
                 <div class="flex-1 relative w-full h-full min-h-[350px]">
                     <img id="modalImg" src="" alt="Case Details" class="absolute inset-0 w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block"></div>
+                    <!-- 改為較輕的漸層，避免完全遮蓋照片 -->
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block pointer-events-none">
+                    </div>
                 </div>
 
                 <!-- 多圖縮圖區 (如果有) -->
@@ -430,8 +443,12 @@
                 <div class="flex-1 relative w-full h-full min-h-[300px]">
                     <img id="newsModalImg" src="" alt="News Details"
                         class="absolute inset-0 w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block"></div>
+                    <div
+                        class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0f0f0f] to-transparent md:hidden pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-r from-transparent to-[#0f0f0f] hidden md:block pointer-events-none">
+                    </div>
                 </div>
             </div>
             <div class="w-full md:w-[55%] p-8 md:p-12 flex flex-col relative z-10 bg-[#0f0f0f] justify-center">
@@ -453,12 +470,14 @@
     <!-- 最新消息 -->
     <section id="news" class="py-32 px-6 bg-white/[0.01] border-t border-white/5">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-end gap-x-6 mb-16 reveal">
+            <div
+                class="flex flex-col md:flex-row items-center md:items-end text-center md:text-left gap-x-6 mb-12 md:mb-16 reveal">
                 <div>
                     <h2 class="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm">Latest News</h2>
                     <h2 class="text-3xl md:text-5xl font-bold whitespace-nowrap">最新消息</h2>
                 </div>
-                <p class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-lg pb-1 leading-relaxed">
+                <p
+                    class="text-gray-400 md:max-w-md mt-4 md:mt-0 text-base md:text-lg pb-1 leading-relaxed mx-auto md:mx-0">
                     關注產業動態，掌握綠能趨勢與我們的最新活動紀錄。
                 </p>
             </div>
@@ -499,7 +518,7 @@
                         <iconify-icon icon="solar:chat-round-line-bold"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             1</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">需求洽詢</h4>
@@ -512,7 +531,7 @@
                         <iconify-icon icon="solar:map-point-wave-bold"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             2</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">現場勘查</h4>
@@ -525,7 +544,7 @@
                         <iconify-icon icon="solar:ruler-pen-bold"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             3</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">規劃設計</h4>
@@ -535,10 +554,10 @@
                 <div class="reveal delay-200 text-center relative process-step group">
                     <div
                         class="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-white/10 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 transition duration-300 shadow-xl relative backdrop-blur-md">
-                        <iconify-icon icon="mdi:hard-hat"
+                        <iconify-icon icon="solar:buildings-bold-duotone"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             4</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">工程建置</h4>
@@ -551,7 +570,7 @@
                         <iconify-icon icon="solar:transmission-bold"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             5</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">併網發電</h4>
@@ -564,7 +583,7 @@
                         <iconify-icon icon="solar:widget-bold"
                             class="text-3xl md:text-4xl text-yellow-400 group-hover:scale-110 transition"></iconify-icon>
                         <div
-                            class="absolute -top-2 -right-2 bg-white/10 text-white font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-black">
+                            class="absolute -top-2 -right-2 bg-yellow-400 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#141414] shadow-md shadow-black">
                             6</div>
                     </div>
                     <h4 class="font-bold mb-2 text-white text-lg">維運監測</h4>
